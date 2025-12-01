@@ -1,0 +1,98 @@
+.overlayBackground {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+  display: flex;
+}
+
+.panel {
+  width: 450px;
+  height: 100%;
+  background: #ffffff;
+  border-left: 1px solid #ddd;
+  padding: 20px;
+  overflow-y: auto;
+  animation: slideIn 0.25s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+}
+
+.panel {
+  width: 450px;
+  height: 100%;
+  background: #ffffff;
+  border-left: 1px solid #ddd;
+  padding: 20px;
+  overflow-y: auto;
+  animation: slideIn 0.25s ease forwards;
+}
+
+.panelClosing {
+  animation: slideOut 0.25s ease forwards;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.notificationItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 8px 0;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.text {
+  font-size: 14px;
+  color: #222;
+  line-height: 1.4;
+}
+
+.time {
+  color: #888;
+  font-size: 12px;
+}

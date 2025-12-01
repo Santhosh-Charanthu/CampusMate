@@ -129,7 +129,7 @@ a.secondary {
 
   .page {
     --background: white;
-    --foreground: #000;
+    --foreground: white;
 
     --text-primary: #ededed;
     --text-secondary: #999;
@@ -138,4 +138,8 @@ a.secondary {
     --button-secondary-hover: #1a1a1a;
     --button-secondary-border: #1a1a1a;
   }
+}
+
+body {
+  background-color: white;
 }
