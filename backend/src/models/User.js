@@ -52,7 +52,7 @@ const UserSchema = new mongoose.Schema(
       interests: [{ type: String }],
       skills: [{ type: String }],
       avatarUrl: { type: String },
-      coverPhotoUrl: { type: String },
+      // coverPhotoUrl: { type: String },
     },
 
     // ----------------------------------
