@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      select: false, // important: prevents sending hashed password
+      select: false, // Prevents sending hashed password
     },
 
     // ----------------------------------
@@ -52,7 +52,7 @@ const UserSchema = new mongoose.Schema(
       interests: [{ type: String }],
       skills: [{ type: String }],
       avatarUrl: { type: String },
-      // coverPhotoUrl: { type: String },
+      coverPhotoUrl: { type: String },
     },
 
     // ----------------------------------
@@ -66,7 +66,7 @@ const UserSchema = new mongoose.Schema(
     },
 
     // ----------------------------------
-    // SOCIAL CONNECTIONS
+    // SOCIAL CONNECTIONS (Required for Share/Mutuals)
     // ----------------------------------
     social: {
       followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
@@ -77,7 +77,6 @@ const UserSchema = new mongoose.Schema(
     // GROUPS & POSTS
     // ----------------------------------
     groupsJoined: [{ type: mongoose.Schema.Types.ObjectId, ref: "Group" }],
-
     savedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
 
     // ----------------------------------
@@ -90,11 +89,10 @@ const UserSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // adds createdAt & updatedAt
+    timestamps: true,
   }
 );
 
-// Hide password in responses
 UserSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
