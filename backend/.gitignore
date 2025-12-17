@@ -1,0 +1,14 @@
+﻿# Node
+node_modules/
+.env
+
+# lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# uploads & built assets
+uploads/
+dist/
+build/
+
