@@ -1,0 +1,821 @@
+/* Create Post Page Styles - Pure CSS */
+/* Consistent with Profile Page theme */
+
+.container {
+  min-height: 100vh;
+  background-color: #fafafa;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Card Form Container */
+.card {
+  width: 100%;
+  max-width: 560px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #efefef;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #262626;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: #f5f5f5;
+}
+
+.backIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.headerTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0;
+}
+
+.headerSpacer {
+  width: 80px;
+}
+
+/* Form Content */
+.formContent {
+  padding: 24px;
+}
+
+/* Upload Section */
+.uploadSection {
+  margin-bottom: 24px;
+}
+
+.sectionLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 12px;
+}
+
+.uploadArea {
+  border: 2px dashed #dbdbdb;
+  border-radius: 12px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  background-color: #fafafa;
+  min-height: 200px;
+}
+
+.uploadArea:hover {
+  border-color: #0095f6;
+  background-color: #f0f9ff;
+}
+
+.uploadAreaActive {
+  border-color: #0095f6;
+  background-color: #f0f9ff;
+}
+
+.uploadIcon {
+  width: 48px;
+  height: 48px;
+  color: #737373;
+  margin-bottom: 16px;
+}
+
+.uploadText {
+  font-size: 15px;
+  color: #262626;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+}
+
+.uploadSubtext {
+  font-size: 13px;
+  color: #737373;
+  margin: 0 0 16px 0;
+}
+
+.uploadButton {
+  background-color: #0095f6;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.uploadButton:hover {
+  background-color: #0077cc;
+  transform: scale(1.02);
+}
+
+.uploadButton:active {
+  transform: scale(0.98);
+}
+
+.hiddenInput {
+  display: none;
+}
+
+/* Media Preview */
+.previewContainer {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.previewWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.previewMedia {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #000000;
+}
+
+.removeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.removeButton:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.removeIcon {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+}
+
+/* Loading State */
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(250, 250, 250, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #efefef;
+  border-top-color: #0095f6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  font-size: 14px;
+  color: #737373;
+  margin: 0;
+}
+
+/* Caption Section */
+.captionSection {
+  margin-bottom: 20px;
+}
+
+.captionTextarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 14px 16px;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #262626;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.captionTextarea::placeholder {
+  color: #a8a8a8;
+}
+
+.captionTextarea:focus {
+  outline: none;
+  border-color: #0095f6;
+  box-shadow: 0 0 0 3px rgba(0, 149, 246, 0.1);
+}
+
+.charCount {
+  text-align: right;
+  font-size: 12px;
+  color: #737373;
+  margin-top: 6px;
+}
+
+/* Tags Section */
+.tagsSection {
+  margin-bottom: 20px;
+}
+
+.tagInput {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #262626;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.tagInput::placeholder {
+  color: #a8a8a8;
+}
+
+.tagInput:focus {
+  outline: none;
+  border-color: #0095f6;
+  box-shadow: 0 0 0 3px rgba(0, 149, 246, 0.1);
+}
+
+/* Controls Row */
+.controlsRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.selectWrapper {
+  flex: 1;
+  position: relative;
+}
+
+.selectLabel {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #737373;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.select {
+  width: 100%;
+  padding: 12px 36px 12px 14px;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #262626;
+  background-color: #ffffff;
+  cursor: pointer;
+  appearance: none;
+  transition: border-color 0.2s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23737373' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #0095f6;
+}
+
+/* Category Toggle */
+.categoryToggle {
+  display: flex;
+  background-color: #efefef;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.categoryButton {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #737373;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.categoryButton:hover {
+  color: #262626;
+}
+
+.categoryButtonActive {
+  background-color: #ffffff;
+  color: #262626;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.cancelButton {
+  flex: 1;
+  padding: 14px 24px;
+  border: 1px solid #dbdbdb;
+  background-color: #ffffff;
+  color: #262626;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #f5f5f5;
+}
+
+.cancelButton:active {
+  transform: scale(0.98);
+}
+
+.publishButton {
+  flex: 2;
+  padding: 14px 24px;
+  border: none;
+  background-color: #0095f6;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.publishButton:hover {
+  background-color: #0077cc;
+}
+
+.publishButton:active {
+  transform: scale(0.98);
+}
+
+.publishButton:disabled {
+  background-color: #b2dffc;
+  cursor: not-allowed;
+}
+
+.publishButton:disabled:hover {
+  background-color: #b2dffc;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .card {
+    border-radius: 12px;
+  }
+
+  .header {
+    padding: 16px 20px;
+  }
+
+  .headerTitle {
+    font-size: 16px;
+  }
+
+  .formContent {
+    padding: 20px;
+  }
+
+  .uploadArea {
+    padding: 32px 16px;
+    min-height: 180px;
+  }
+
+  .uploadIcon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 16px 12px;
+  }
+
+  .header {
+    padding: 14px 16px;
+  }
+
+  .backButton {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .backIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .headerTitle {
+    font-size: 15px;
+  }
+
+  .headerSpacer {
+    width: 60px;
+  }
+
+  .formContent {
+    padding: 16px;
+  }
+
+  .sectionLabel {
+    font-size: 13px;
+  }
+
+  .uploadArea {
+    padding: 28px 14px;
+    min-height: 160px;
+  }
+
+  .uploadIcon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 12px;
+  }
+
+  .uploadText {
+    font-size: 14px;
+  }
+
+  .uploadSubtext {
+    font-size: 12px;
+  }
+
+  .uploadButton {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .captionTextarea {
+    min-height: 80px;
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .tagInput {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .controlsRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .select {
+    padding: 10px 32px 10px 12px;
+    font-size: 13px;
+  }
+
+  .categoryButton {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .cancelButton,
+  .publishButton {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 12px 8px;
+  }
+
+  .header {
+    padding: 12px 14px;
+  }
+
+  .backButton {
+    padding: 5px 8px;
+    font-size: 13px;
+    gap: 4px;
+  }
+
+  .backIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .headerTitle {
+    font-size: 14px;
+  }
+
+  .headerSpacer {
+    width: 50px;
+  }
+
+  .formContent {
+    padding: 14px;
+  }
+
+  .sectionLabel {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .uploadArea {
+    padding: 24px 12px;
+    min-height: 140px;
+  }
+
+  .uploadIcon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 10px;
+  }
+
+  .uploadText {
+    font-size: 13px;
+  }
+
+  .uploadSubtext {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .uploadButton {
+    padding: 7px 14px;
+    font-size: 12px;
+  }
+
+  .captionTextarea {
+    min-height: 70px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .charCount {
+    font-size: 11px;
+  }
+
+  .tagInput {
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  .selectLabel {
+    font-size: 11px;
+  }
+
+  .select {
+    padding: 9px 28px 9px 10px;
+    font-size: 12px;
+  }
+
+  .categoryButton {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+
+  .cancelButton,
+  .publishButton {
+    padding: 11px 16px;
+    font-size: 13px;
+  }
+
+  .removeButton {
+    width: 28px;
+    height: 28px;
+    top: 8px;
+    right: 8px;
+  }
+
+  .removeIcon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Extra small screens (300px) */
+@media (max-width: 320px) {
+  .container {
+    padding: 8px 6px;
+    min-width: 300px;
+  }
+
+  .card {
+    border-radius: 10px;
+  }
+
+  .header {
+    padding: 10px 12px;
+  }
+
+  .backButton {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+
+  .backIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .headerTitle {
+    font-size: 13px;
+  }
+
+  .headerSpacer {
+    width: 40px;
+  }
+
+  .formContent {
+    padding: 12px;
+  }
+
+  .sectionLabel {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .uploadArea {
+    padding: 20px 10px;
+    min-height: 120px;
+    border-radius: 8px;
+  }
+
+  .uploadIcon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 8px;
+  }
+
+  .uploadText {
+    font-size: 12px;
+  }
+
+  .uploadSubtext {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+
+  .uploadButton {
+    padding: 6px 12px;
+    font-size: 11px;
+    border-radius: 6px;
+  }
+
+  .captionTextarea {
+    min-height: 60px;
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .charCount {
+    font-size: 10px;
+  }
+
+  .tagInput {
+    padding: 8px 10px;
+    font-size: 11px;
+    border-radius: 8px;
+  }
+
+  .selectLabel {
+    font-size: 10px;
+  }
+
+  .select {
+    padding: 8px 24px 8px 8px;
+    font-size: 11px;
+    border-radius: 8px;
+  }
+
+  .categoryToggle {
+    border-radius: 8px;
+    padding: 3px;
+  }
+
+  .categoryButton {
+    padding: 6px 8px;
+    font-size: 11px;
+    border-radius: 6px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .cancelButton,
+  .publishButton {
+    padding: 10px 14px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .previewWrapper {
+    border-radius: 8px;
+  }
+
+  .removeButton {
+    width: 24px;
+    height: 24px;
+    top: 6px;
+    right: 6px;
+  }
+
+  .removeIcon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+  }
+
+  .loadingText {
+    font-size: 12px;
+  }
+}

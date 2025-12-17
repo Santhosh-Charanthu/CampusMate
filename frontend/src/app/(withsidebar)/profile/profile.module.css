@@ -1,0 +1,460 @@
+/* Profile Page Styles - Pure CSS */
+
+.container {
+  min-height: 100vh;
+  background-color: #fafafa;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+/* Profile Header Section */
+.profileHeader {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  border-bottom: 1px solid #efefef;
+}
+
+.profileHeaderContent {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Profile Picture with Edit Button */
+.avatarContainer {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.editButton {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #0095f6;
+  border: 3px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 149, 246, 0.4);
+}
+
+.editButton:hover {
+  background-color: #0077cc;
+  transform: scale(1.05);
+}
+
+.editIcon {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+}
+
+/* User Info */
+.userInfo {
+  margin-bottom: 24px;
+}
+
+.displayName {
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.bio {
+  font-size: 15px;
+  color: #737373;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 400px;
+  padding: 0 10px;
+}
+
+/* Stats Section */
+.stats {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.statNumber {
+  font-size: 20px;
+  font-weight: 700;
+  color: #262626;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #737373;
+  font-weight: 400;
+}
+
+/* Posts Grid Section */
+.postsSection {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.postItem {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #efefef;
+  cursor: pointer;
+}
+
+.postImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.postOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.postItem:hover .postOverlay {
+  opacity: 1;
+}
+
+.postItem:hover .postImage {
+  transform: scale(1.02);
+}
+
+.overlayStat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.overlayIcon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Video indicator */
+.videoIndicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #ffffff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.videoIcon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profileHeader {
+    padding: 30px 16px;
+  }
+
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+
+  .editButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .editIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .displayName {
+    font-size: 20px;
+  }
+
+  .bio {
+    font-size: 14px;
+  }
+
+  .stats {
+    gap: 36px;
+  }
+
+  .statNumber {
+    font-size: 18px;
+  }
+
+  .statLabel {
+    font-size: 13px;
+  }
+
+  .postsSection {
+    padding: 16px;
+  }
+
+  .postsGrid {
+    gap: 3px;
+  }
+
+  .overlayStat {
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .overlayIcon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileHeader {
+    padding: 24px 12px;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+    border-width: 3px;
+  }
+
+  .editButton {
+    width: 28px;
+    height: 28px;
+    border-width: 2px;
+  }
+
+  .editIcon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .displayName {
+    font-size: 18px;
+  }
+
+  .bio {
+    font-size: 13px;
+  }
+
+  .stats {
+    gap: 28px;
+  }
+
+  .statNumber {
+    font-size: 16px;
+  }
+
+  .statLabel {
+    font-size: 12px;
+  }
+
+  .postsSection {
+    padding: 12px;
+  }
+
+  .postsGrid {
+    gap: 2px;
+  }
+
+  .sectionTitle {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .profileHeader {
+    padding: 20px 10px;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .editButton {
+    width: 26px;
+    height: 26px;
+  }
+
+  .editIcon {
+    width: 11px;
+    height: 11px;
+  }
+
+  .avatarContainer {
+    margin-bottom: 16px;
+  }
+
+  .displayName {
+    font-size: 16px;
+  }
+
+  .bio {
+    font-size: 12px;
+    padding: 0 5px;
+  }
+
+  .stats {
+    gap: 20px;
+  }
+
+  .statNumber {
+    font-size: 14px;
+  }
+
+  .statLabel {
+    font-size: 11px;
+  }
+
+  .postsSection {
+    padding: 8px;
+  }
+
+  .postsGrid {
+    gap: 2px;
+  }
+
+  .sectionTitle {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .postOverlay {
+    gap: 12px;
+  }
+
+  .overlayStat {
+    font-size: 10px;
+    gap: 3px;
+  }
+
+  .overlayIcon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Extra small screens (300px) */
+@media (max-width: 320px) {
+  .container {
+    min-width: 300px;
+  }
+
+  .profileHeader {
+    padding: 16px 8px;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .editButton {
+    width: 24px;
+    height: 24px;
+  }
+
+  .editIcon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .displayName {
+    font-size: 15px;
+  }
+
+  .bio {
+    font-size: 11px;
+  }
+
+  .stats {
+    gap: 16px;
+  }
+
+  .statNumber {
+    font-size: 13px;
+  }
+
+  .statLabel {
+    font-size: 10px;
+  }
+
+  .postsSection {
+    padding: 6px;
+  }
+
+  .postsGrid {
+    gap: 1px;
+  }
+
+  .sectionTitle {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+}

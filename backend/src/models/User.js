@@ -19,8 +19,9 @@ const UserSchema = new mongoose.Schema(
           if (!v) return false;
           const parts = v.split("@");
           if (parts.length !== 2) return false;
-          const domain = parts[1] ? parts[1].toLowerCase() : "";
-          return domain.includes(".edu"); // student must have .edu domain
+          const domain = parts[1].toLowerCase();
+          // Student must have .edu domain (Strict check from your code)
+          return domain.includes(".edu");
         },
         message: (props) =>
           `${props.value} is not a valid student email (domain must contain '.edu')`,
@@ -30,7 +31,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      select: false, // important: prevents sending hashed password
+      select: false, // Prevents sending hashed password
     },
 
     // ----------------------------------
@@ -66,7 +67,7 @@ const UserSchema = new mongoose.Schema(
     },
 
     // ----------------------------------
-    // SOCIAL CONNECTIONS
+    // SOCIAL CONNECTIONS (Required for Share/Mutuals)
     // ----------------------------------
     social: {
       followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
@@ -77,7 +78,6 @@ const UserSchema = new mongoose.Schema(
     // GROUPS & POSTS
     // ----------------------------------
     groupsJoined: [{ type: mongoose.Schema.Types.ObjectId, ref: "Group" }],
-
     savedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
 
     // ----------------------------------
@@ -90,11 +90,10 @@ const UserSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // adds createdAt & updatedAt
+    timestamps: true,
   }
 );
 
-// Hide password in responses
 UserSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;

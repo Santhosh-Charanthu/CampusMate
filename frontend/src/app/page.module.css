@@ -25,7 +25,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  background-color: var(--foreground);
+  background-color: white;
   padding: 120px 60px;
 }
 
@@ -128,8 +128,8 @@ a.secondary {
   }
 
   .page {
-    --background: #000;
-    --foreground: #000;
+    --background: white;
+    --foreground: white;
 
     --text-primary: #ededed;
     --text-secondary: #999;
@@ -138,4 +138,8 @@ a.secondary {
     --button-secondary-hover: #1a1a1a;
     --button-secondary-border: #1a1a1a;
   }
+}
+
+body {
+  background-color: white;
 }
