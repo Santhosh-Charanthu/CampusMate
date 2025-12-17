@@ -73,7 +73,7 @@ export default function SignupPage() {
       }
     });
 
-    const res = await fetch("http://localhost:5000/api/auth/signup", {
+    const res = await fetch("http://localhost:5000/register", {
       method: "POST",
       body: formData,
     });
@@ -86,14 +86,50 @@ export default function SignupPage() {
     <div className="auth-container">
       <h2 className="auth-title">Signup</h2>
 
-      <input name="name" type="text" placeholder="Full Name" className="auth-input" onChange={handleChange} />
-      <input name="email" type="email" placeholder="Email" className="auth-input" onChange={handleChange} />
-      <input name="password" type="password" placeholder="Password" className="auth-input" onChange={handleChange} />
+      <input
+        name="name"
+        type="text"
+        placeholder="Full Name"
+        className="auth-input"
+        onChange={handleChange}
+      />
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        className="auth-input"
+        onChange={handleChange}
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        className="auth-input"
+        onChange={handleChange}
+      />
 
-      <input name="collegeName" type="text" placeholder="College Name" className="auth-input" onChange={handleChange} />
-      <input name="rollNumber" type="text" placeholder="Roll Number" className="auth-input" onChange={handleChange} />
+      <input
+        name="collegeName"
+        type="text"
+        placeholder="College Name"
+        className="auth-input"
+        onChange={handleChange}
+      />
+      <input
+        name="rollNumber"
+        type="text"
+        placeholder="Roll Number"
+        className="auth-input"
+        onChange={handleChange}
+      />
 
-      <input name="year" type="number" placeholder="Year" className="auth-input" onChange={handleChange} />
+      <input
+        name="year"
+        type="number"
+        placeholder="Year"
+        className="auth-input"
+        onChange={handleChange}
+      />
 
       <label className="auth-label">Department</label>
       <select name="department" className="auth-input" onChange={handleChange}>
@@ -155,7 +191,9 @@ export default function SignupPage() {
         />
       </div>
 
-      <button className="auth-btn" onClick={handleSignup}>Create Account</button>
+      <button className="auth-btn" onClick={handleSignup}>
+        Create Account
+      </button>
 
       <p className="auth-link">
         Already have an account? <Link href="/auth/login">Login</Link>

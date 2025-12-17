@@ -22,16 +22,30 @@ function createToken(user) {
  */
 exports.register = async (req, res, next) => {
   try {
-    const { name, email, password, college } = req.body || {};
+    const {
+      name,
+      email,
+      password,
+      collegeName,
+      rollNumber,
+      year,
+      department,
+      bio,
+      interests,
+      skills,
+    } = req.body || {};
 
-    // Basic required checks (keep small — model will enforce domain 'edu')
+    // Basic validations (Mongoose enforces the rest)
     if (!name || !email || !password) {
-      return res.status(400).json({ message: "name, email and password are required" });
+      return res
+        .status(400)
+        .json({ message: "name, email and password are required" });
     }
 
-    // Password rule: at least 6 chars here (you can tighten later)
     if (password.length < 6) {
-      return res.status(400).json({ message: "password must be at least 6 characters" });
+      return res
+        .status(400)
+        .json({ message: "password must be at least 6 characters" });
     }
 
     // Check existing user
@@ -44,29 +58,57 @@ exports.register = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
 
-    // Create user (model has email validator for '.edu' presence)
+    // Convert interests & skills to arrays if single entry
+    const interestsArr = interests
+      ? Array.isArray(interests)
+        ? interests
+        : [interests]
+      : [];
+
+    const skillsArr = skills ? (Array.isArray(skills) ? skills : [skills]) : [];
+
+    // Avatar and Cover Photo URLs from Multer
+    const avatarUrl = req.files?.avatar?.[0]?.path || "";
+    // const coverPhotoUrl = req.files?.coverPhoto?.[0]?.path || "";
+
+    // Build final user object
     const user = new User({
       name: name.trim(),
       email: email.toLowerCase().trim(),
       password: hashed,
-      college: college || {},
+
+      college: {
+        name: collegeName || "",
+        rollNumber: rollNumber || "",
+        verified: false,
+      },
+
+      profile: {
+        year: parseInt(year) || undefined,
+        department: department || "",
+        bio: bio || "",
+        interests: interestsArr,
+        skills: skillsArr,
+        avatarUrl,
+        // coverPhotoUrl,
+      },
+
+      role: "student",
     });
 
     await user.save();
-
     const token = createToken(user);
 
-    // user.toJSON() excludes password (model's toJSON)
     return res.status(201).json({
-      message: "Registered successfully",
-      user: user.toJSON ? user.toJSON() : user,
+      success: true,
+      message: "Registered successfully!",
+      user: user.toJSON(),
       token,
     });
   } catch (err) {
-    // If mongoose validation error (e.g. our email domain validator), return 400 with message
-    if (err && err.name === "ValidationError") {
-      const first = Object.values(err.errors)[0];
-      return res.status(400).json({ message: first.message || "Validation error" });
+    if (err?.name === "ValidationError") {
+      const firstError = Object.values(err.errors)[0];
+      return res.status(400).json({ message: firstError.message });
     }
     next(err);
   }
@@ -81,11 +123,15 @@ exports.login = async (req, res, next) => {
     const { email, password } = req.body || {};
 
     if (!email || !password) {
-      return res.status(400).json({ message: "email and password are required" });
+      return res
+        .status(400)
+        .json({ message: "email and password are required" });
     }
 
     // password field on model is stored select: false, so explicitly select it
-    const user = await User.findOne({ email: email.toLowerCase().trim() }).select("+password");
+    const user = await User.findOne({
+      email: email.toLowerCase().trim(),
+    }).select("+password");
 
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });

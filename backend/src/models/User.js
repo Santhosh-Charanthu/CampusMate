@@ -19,9 +19,8 @@ const UserSchema = new mongoose.Schema(
           if (!v) return false;
           const parts = v.split("@");
           if (parts.length !== 2) return false;
-          const domain = parts[1].toLowerCase();
-          // Student must have .edu domain (Strict check from your code)
-          return domain.includes(".edu");
+          const domain = parts[1] ? parts[1].toLowerCase() : "";
+          return domain.includes(".edu"); // student must have .edu domain
         },
         message: (props) =>
           `${props.value} is not a valid student email (domain must contain '.edu')`,
