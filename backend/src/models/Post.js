@@ -3,15 +3,19 @@ const mongoose = require("mongoose");
 const PostSchema = new mongoose.Schema({
   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 
-  type: { type: String, enum: ["post", "reel"], default: "post" },
+  type: {
+    type: String,
+    enum: ["text", "image", "video"],
+    default: "text",
+  },
 
   caption: String,
-  mediaUrls: [String], // image or video
+  mediaUrls: [String],
   thumbnailUrl: String,
 
   visibility: {
     type: String,
-    enum: ["public", "friends", "group"],
+    enum: ["public", "private", "group", "friends"],
     default: "public",
   },
   groupId: { type: mongoose.Schema.Types.ObjectId, ref: "Group" },

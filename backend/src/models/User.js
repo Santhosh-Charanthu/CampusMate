@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
           const parts = v.split("@");
           if (parts.length !== 2) return false;
           const domain = parts[1] ? parts[1].toLowerCase() : "";
-          return domain.includes(".edu"); // student must have .edu domain
+          return domain.includes(".edu");
         },
         message: (props) =>
           `${props.value} is not a valid student email (domain must contain '.edu')`,
@@ -51,7 +51,10 @@ const UserSchema = new mongoose.Schema(
       bio: { type: String },
       interests: [{ type: String }],
       skills: [{ type: String }],
-      avatarUrl: { type: String },
+      avatarUrl: {
+        type: String,
+        default: "",
+      },
       // coverPhotoUrl: { type: String },
     },
 
@@ -77,6 +80,12 @@ const UserSchema = new mongoose.Schema(
     // GROUPS & POSTS
     // ----------------------------------
     groupsJoined: [{ type: mongoose.Schema.Types.ObjectId, ref: "Group" }],
+    posts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
 
     savedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
 

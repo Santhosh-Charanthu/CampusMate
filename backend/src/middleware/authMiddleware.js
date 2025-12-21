@@ -9,7 +9,11 @@ const JWT_SECRET = process.env.JWT_SECRET || "change_this_in_prod";
  */
 function getTokenFromRequest(req) {
   const authHeader = req.headers?.authorization;
-  if (authHeader && typeof authHeader === "string" && authHeader.startsWith("Bearer ")) {
+  if (
+    authHeader &&
+    typeof authHeader === "string" &&
+    authHeader.startsWith("Bearer ")
+  ) {
     return authHeader.split(" ")[1];
   }
 
@@ -27,7 +31,8 @@ function getTokenFromRequest(req) {
 async function requireAuth(req, res, next) {
   try {
     const token = getTokenFromRequest(req);
-    if (!token) return res.status(401).json({ message: "Authorization token missing" });
+    if (!token)
+      return res.status(401).json({ message: "Authorization token missing" });
 
     let decoded;
     try {
@@ -38,7 +43,8 @@ async function requireAuth(req, res, next) {
 
     // find user and attach (exclude password)
     const user = await User.findById(decoded.id).select("-password");
-    if (!user) return res.status(401).json({ message: "User not found for token" });
+    if (!user)
+      return res.status(401).json({ message: "User not found for token" });
 
     req.user = user;
     next();
@@ -84,7 +90,9 @@ function requireRole(...allowedRoles) {
     const userRole = (req.user.role || "").toString();
     if (allowedRoles.includes(userRole)) return next();
 
-    return res.status(403).json({ message: "Forbidden: insufficient permissions" });
+    return res
+      .status(403)
+      .json({ message: "Forbidden: insufficient permissions" });
   };
 }
 
