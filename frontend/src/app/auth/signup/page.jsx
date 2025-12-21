@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import Link from "next/link"
-import "../auth.css"
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import "../auth.css";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -16,55 +16,55 @@ export default function SignupPage() {
     department: "",
     bio: "",
     profilePicture: null,
-  })
+  });
 
-  const [errors, setErrors] = useState({})
-  const [touched, setTouched] = useState({})
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
 
-  const [otpSent, setOtpSent] = useState(false)
-  const [otpVerified, setOtpVerified] = useState(false)
-  const [mockOtp, setMockOtp] = useState("")
-  const [enteredOtp, setEnteredOtp] = useState("")
-  const [otpError, setOtpError] = useState("")
-  const [otpSuccess, setOtpSuccess] = useState("")
-  const [countdown, setCountdown] = useState(0)
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
+  const [mockOtp, setMockOtp] = useState("");
+  const [enteredOtp, setEnteredOtp] = useState("");
+  const [otpError, setOtpError] = useState("");
+  const [otpSuccess, setOtpSuccess] = useState("");
+  const [countdown, setCountdown] = useState(0);
 
   useEffect(() => {
     if (countdown > 0) {
-      const timer = setTimeout(() => setCountdown(countdown - 1), 1000)
-      return () => clearTimeout(timer)
+      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+      return () => clearTimeout(timer);
     }
-  }, [countdown])
+  }, [countdown]);
 
   const handleSendOtp = () => {
     if (!formData.email) {
-      setOtpError("Please enter your email first")
-      return
+      setOtpError("Please enter your email first");
+      return;
     }
 
-    const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString()
-    setMockOtp(generatedOtp)
-    setOtpSent(true)
-    setOtpError("")
-    setOtpSuccess(`OTP sent to ${formData.email}! (Mock OTP: ${generatedOtp})`)
-    setCountdown(60)
-    setEnteredOtp("")
-  }
+    const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    setMockOtp(generatedOtp);
+    setOtpSent(true);
+    setOtpError("");
+    setOtpSuccess(`OTP sent to ${formData.email}! (Mock OTP: ${generatedOtp})`);
+    setCountdown(60);
+    setEnteredOtp("");
+  };
 
   const handleVerifyOtp = () => {
     if (enteredOtp === mockOtp) {
-      setOtpVerified(true)
-      setOtpSuccess("Email verified successfully!")
-      setOtpError("")
+      setOtpVerified(true);
+      setOtpSuccess("Email verified successfully!");
+      setOtpError("");
     } else {
-      setOtpError("Invalid OTP. Please try again.")
-      setOtpSuccess("")
+      setOtpError("Invalid OTP. Please try again.");
+      setOtpSuccess("");
     }
-  }
+  };
 
-  const [interests, setInterests] = useState([])
-  const [interestInput, setInterestInput] = useState("")
-  const [showInterestSuggestions, setShowInterestSuggestions] = useState(false)
+  const [interests, setInterests] = useState([]);
+  const [interestInput, setInterestInput] = useState("");
+  const [showInterestSuggestions, setShowInterestSuggestions] = useState(false);
 
   const predefinedInterests = [
     { name: "Software Development", color: "#FF6B6B" },
@@ -85,13 +85,13 @@ export default function SignupPage() {
     { name: "Placements & Internships", color: "#90CAF9" },
     { name: "Higher Studies", color: "#B39DDB" },
     { name: "Research & Publications", color: "#80CBC4" },
-  ]
+  ];
 
-  const [selectedSkills, setSelectedSkills] = useState([])
-  const [skillSearchInput, setSkillSearchInput] = useState("")
-  const [showSkillDropdown, setShowSkillDropdown] = useState(false)
-  const skillInputRef = useRef(null)
-  const [skillDropdownDirection, setSkillDropdownDirection] = useState("down")
+  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [skillSearchInput, setSkillSearchInput] = useState("");
+  const [showSkillDropdown, setShowSkillDropdown] = useState(false);
+  const skillInputRef = useRef(null);
+  const [skillDropdownDirection, setSkillDropdownDirection] = useState("down");
 
   const predefinedSkills = {
     "Programming & CS": [
@@ -134,206 +134,220 @@ export default function SignupPage() {
       { name: "DevOps", color: "#66BB6A" },
       { name: "Blockchain", color: "#FFA726" },
     ],
-  }
+  };
 
-  const allSkills = Object.values(predefinedSkills).flat()
+  const allSkills = Object.values(predefinedSkills).flat();
 
-  const [fileName, setFileName] = useState("")
+  const [fileName, setFileName] = useState("");
 
   const validateField = (name, value) => {
     switch (name) {
       case "fullName":
-        if (!value.trim()) return "Full name is required"
-        return ""
+        if (!value.trim()) return "Full name is required";
+        return "";
       case "dateOfBirth":
-        if (!value) return "Date of birth is required"
-        const selectedDate = new Date(value)
-        const today = new Date()
-        if (selectedDate > today) return "Date of birth cannot be in the future"
-        const age = today.getFullYear() - selectedDate.getFullYear()
-        const monthDiff = today.getMonth() - selectedDate.getMonth()
-        const dayDiff = today.getDate() - selectedDate.getDate()
-        const actualAge = monthDiff < 0 || (monthDiff === 0 && dayDiff < 0) ? age - 1 : age
-        if (actualAge < 16) return "You must be at least 16 years old"
-        return ""
+        if (!value) return "Date of birth is required";
+        const selectedDate = new Date(value);
+        const today = new Date();
+        if (selectedDate > today)
+          return "Date of birth cannot be in the future";
+        const age = today.getFullYear() - selectedDate.getFullYear();
+        const monthDiff = today.getMonth() - selectedDate.getMonth();
+        const dayDiff = today.getDate() - selectedDate.getDate();
+        const actualAge =
+          monthDiff < 0 || (monthDiff === 0 && dayDiff < 0) ? age - 1 : age;
+        if (actualAge < 16) return "You must be at least 16 years old";
+        return "";
       case "email":
-        if (!value.trim()) return "Email is required"
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Please enter a valid email"
-        return ""
+        if (!value.trim()) return "Email is required";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+          return "Please enter a valid email";
+        return "";
       case "password":
-        if (!value) return "Password is required"
-        if (value.length < 6) return "Password must be at least 6 characters"
-        return ""
+        if (!value) return "Password is required";
+        if (value.length < 6) return "Password must be at least 6 characters";
+        return "";
       case "collegeName":
-        if (!value.trim()) return "College name is required"
-        return ""
+        if (!value.trim()) return "College name is required";
+        return "";
       case "rollNumber":
-        if (!value.trim()) return "Roll number is required"
-        return ""
+        if (!value.trim()) return "Roll number is required";
+        return "";
       case "year":
-        if (!value) return "Please select your year"
-        return ""
+        if (!value) return "Please select your year";
+        return "";
       case "department":
-        if (!value) return "Please select your department"
-        return ""
+        if (!value) return "Please select your department";
+        return "";
       case "bio":
-        if (!value.trim()) return "Bio is required"
-        if (value.trim().length < 20) return "Bio must be at least 20 characters"
-        return ""
+        if (!value.trim()) return "Bio is required";
+        if (value.trim().length < 20)
+          return "Bio must be at least 20 characters";
+        return "";
       default:
-        return ""
+        return "";
     }
-  }
+  };
 
   const validateAllFields = () => {
-    const newErrors = {}
+    const newErrors = {};
 
-    newErrors.fullName = validateField("fullName", formData.fullName)
-    newErrors.dateOfBirth = validateField("dateOfBirth", formData.dateOfBirth)
-    newErrors.email = validateField("email", formData.email)
-    newErrors.password = validateField("password", formData.password)
-    newErrors.collegeName = validateField("collegeName", formData.collegeName)
-    newErrors.rollNumber = validateField("rollNumber", formData.rollNumber)
-    newErrors.year = validateField("year", formData.year)
-    newErrors.department = validateField("department", formData.department)
-    newErrors.bio = validateField("bio", formData.bio)
+    newErrors.fullName = validateField("fullName", formData.fullName);
+    newErrors.dateOfBirth = validateField("dateOfBirth", formData.dateOfBirth);
+    newErrors.email = validateField("email", formData.email);
+    newErrors.password = validateField("password", formData.password);
+    newErrors.collegeName = validateField("collegeName", formData.collegeName);
+    newErrors.rollNumber = validateField("rollNumber", formData.rollNumber);
+    newErrors.year = validateField("year", formData.year);
+    newErrors.department = validateField("department", formData.department);
+    newErrors.bio = validateField("bio", formData.bio);
 
     if (!formData.profilePicture) {
-      newErrors.profilePicture = "Profile picture is required"
+      newErrors.profilePicture = "Profile picture is required";
     }
 
     if (!otpVerified) {
-      newErrors.emailVerification = "Please verify your email"
+      newErrors.emailVerification = "Please verify your email";
     }
 
     if (interests.length === 0) {
-      newErrors.interests = "Please select at least 1 interest"
+      newErrors.interests = "Please select at least 1 interest";
     }
 
     if (selectedSkills.length === 0) {
-      newErrors.skills = "Please select at least 1 skill"
+      newErrors.skills = "Please select at least 1 skill";
     }
 
-    return newErrors
-  }
+    return newErrors;
+  };
 
   const isFormValid = () => {
-    const validationErrors = validateAllFields()
-    return Object.values(validationErrors).every((error) => !error)
-  }
+    const validationErrors = validateAllFields();
+    return Object.values(validationErrors).every((error) => !error);
+  };
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
-    })
+    });
 
     if (touched[name]) {
-      const error = validateField(name, value)
-      setErrors((prev) => ({ ...prev, [name]: error }))
+      const error = validateField(name, value);
+      setErrors((prev) => ({ ...prev, [name]: error }));
     }
-  }
+  };
 
   const handleBlur = (e) => {
-    const { name, value } = e.target
-    setTouched((prev) => ({ ...prev, [name]: true }))
-    const error = validateField(name, value)
-    setErrors((prev) => ({ ...prev, [name]: error }))
-  }
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    const error = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: error }));
+  };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
       setFormData({
         ...formData,
         profilePicture: file,
-      })
-      setFileName(file.name)
-      setErrors((prev) => ({ ...prev, profilePicture: "" }))
-      setTouched((prev) => ({ ...prev, profilePicture: true }))
+      });
+      setFileName(file.name);
+      setErrors((prev) => ({ ...prev, profilePicture: "" }));
+      setTouched((prev) => ({ ...prev, profilePicture: true }));
     }
-  }
+  };
 
   const handleInterestInputChange = (e) => {
-    setInterestInput(e.target.value)
-    setShowInterestSuggestions(e.target.value.length > 0)
-  }
+    setInterestInput(e.target.value);
+    setShowInterestSuggestions(e.target.value.length > 0);
+  };
 
   const filteredInterests = predefinedInterests.filter(
     (interest) =>
       interest.name.toLowerCase().includes(interestInput.toLowerCase()) &&
-      !interests.some((i) => i.name === interest.name),
-  )
+      !interests.some((i) => i.name === interest.name)
+  );
 
   const addInterest = (interest) => {
     if (!interests.some((i) => i.name === interest.name)) {
-      setInterests([...interests, interest])
-      setErrors((prev) => ({ ...prev, interests: "" }))
+      setInterests([...interests, interest]);
+      setErrors((prev) => ({ ...prev, interests: "" }));
     }
-    setInterestInput("")
-    setShowInterestSuggestions(false)
-  }
+    setInterestInput("");
+    setShowInterestSuggestions(false);
+  };
 
   const removeInterest = (indexToRemove) => {
-    const newInterests = interests.filter((_, index) => index !== indexToRemove)
-    setInterests(newInterests)
+    const newInterests = interests.filter(
+      (_, index) => index !== indexToRemove
+    );
+    setInterests(newInterests);
     if (newInterests.length === 0 && touched.interests) {
-      setErrors((prev) => ({ ...prev, interests: "Please select at least 1 interest" }))
+      setErrors((prev) => ({
+        ...prev,
+        interests: "Please select at least 1 interest",
+      }));
     }
-  }
+  };
 
   const handleSkillSearchChange = (e) => {
-    setSkillSearchInput(e.target.value)
-    setShowSkillDropdown(true)
-    checkDropdownPosition()
-  }
+    setSkillSearchInput(e.target.value);
+    setShowSkillDropdown(true);
+    checkDropdownPosition();
+  };
 
   const checkDropdownPosition = () => {
     if (skillInputRef.current) {
-      const rect = skillInputRef.current.getBoundingClientRect()
-      const spaceBelow = window.innerHeight - rect.bottom
-      const spaceAbove = rect.top
-      const dropdownHeight = 240 // max-height of dropdown
+      const rect = skillInputRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+      const dropdownHeight = 240; // max-height of dropdown
 
       if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
-        setSkillDropdownDirection("up")
+        setSkillDropdownDirection("up");
       } else {
-        setSkillDropdownDirection("down")
+        setSkillDropdownDirection("down");
       }
     }
-  }
+  };
 
   const handleSkillFocus = () => {
-    setShowSkillDropdown(true)
-    checkDropdownPosition()
-  }
+    setShowSkillDropdown(true);
+    checkDropdownPosition();
+  };
 
   const filteredSkills = allSkills.filter(
     (skill) =>
       skill.name.toLowerCase().includes(skillSearchInput.toLowerCase()) &&
-      !selectedSkills.some((s) => s.name === skill.name),
-  )
+      !selectedSkills.some((s) => s.name === skill.name)
+  );
 
   const addSkill = (skill) => {
     if (!selectedSkills.some((s) => s.name === skill.name)) {
-      setSelectedSkills([...selectedSkills, skill])
-      setErrors((prev) => ({ ...prev, skills: "" }))
+      setSelectedSkills([...selectedSkills, skill]);
+      setErrors((prev) => ({ ...prev, skills: "" }));
     }
-    setSkillSearchInput("")
-    setShowSkillDropdown(false)
-  }
+    setSkillSearchInput("");
+    setShowSkillDropdown(false);
+  };
 
   const removeSkill = (skillToRemove) => {
-    const newSkills = selectedSkills.filter((s) => s.name !== skillToRemove.name)
-    setSelectedSkills(newSkills)
+    const newSkills = selectedSkills.filter(
+      (s) => s.name !== skillToRemove.name
+    );
+    setSelectedSkills(newSkills);
     if (newSkills.length === 0 && touched.skills) {
-      setErrors((prev) => ({ ...prev, skills: "Please select at least 1 skill" }))
+      setErrors((prev) => ({
+        ...prev,
+        skills: "Please select at least 1 skill",
+      }));
     }
-  }
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     setTouched({
       fullName: true,
@@ -348,26 +362,26 @@ export default function SignupPage() {
       profilePicture: true,
       interests: true,
       skills: true,
-    })
+    });
 
-    const validationErrors = validateAllFields()
-    setErrors(validationErrors)
+    const validationErrors = validateAllFields();
+    setErrors(validationErrors);
 
     if (!isFormValid()) {
-      return
+      return;
     }
 
     const completeData = {
       ...formData,
       interests: interests.map((i) => i.name),
       skills: selectedSkills.map((s) => s.name),
-    }
-    console.log("Signup form submitted:", completeData)
-  }
+    };
+    console.log("Signup form submitted:", completeData);
+  };
 
   const handleGoogleSignup = () => {
-    console.log("Google signup initiated")
-  }
+    console.log("Google signup initiated");
+  };
 
   return (
     <div className="auth-container">
@@ -415,7 +429,9 @@ export default function SignupPage() {
               onBlur={handleBlur}
               placeholder="John Doe"
             />
-            {touched.fullName && errors.fullName && <div className="field-error">{errors.fullName}</div>}
+            {touched.fullName && errors.fullName && (
+              <div className="field-error">{errors.fullName}</div>
+            )}
           </div>
 
           <div className="form-group">
@@ -429,7 +445,9 @@ export default function SignupPage() {
               onBlur={handleBlur}
               max={new Date().toISOString().split("T")[0]}
             />
-            {touched.dateOfBirth && errors.dateOfBirth && <div className="field-error">{errors.dateOfBirth}</div>}
+            {touched.dateOfBirth && errors.dateOfBirth && (
+              <div className="field-error">{errors.dateOfBirth}</div>
+            )}
           </div>
 
           <div className="form-group">
@@ -448,14 +466,23 @@ export default function SignupPage() {
               />
               {otpVerified && (
                 <span className="verified-badge">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                   Verified
                 </span>
               )}
             </div>
-            {touched.email && errors.email && !otpVerified && <div className="field-error">{errors.email}</div>}
+            {touched.email && errors.email && !otpVerified && (
+              <div className="field-error">{errors.email}</div>
+            )}
 
             {!otpVerified && (
               <button
@@ -464,7 +491,11 @@ export default function SignupPage() {
                 onClick={handleSendOtp}
                 disabled={countdown > 0 || !formData.email}
               >
-                {countdown > 0 ? `Resend in ${countdown}s` : otpSent ? "Resend OTP" : "Send OTP"}
+                {countdown > 0
+                  ? `Resend in ${countdown}s`
+                  : otpSent
+                  ? "Resend OTP"
+                  : "Send OTP"}
               </button>
             )}
 
@@ -480,9 +511,11 @@ export default function SignupPage() {
                     id="otp"
                     value={enteredOtp}
                     onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, "").slice(0, 6)
-                      setEnteredOtp(value)
-                      setOtpError("")
+                      const value = e.target.value
+                        .replace(/\D/g, "")
+                        .slice(0, 6);
+                      setEnteredOtp(value);
+                      setOtpError("");
                     }}
                     placeholder="000000"
                     maxLength="6"
@@ -499,7 +532,9 @@ export default function SignupPage() {
                 </div>
               </div>
             )}
-            {touched.email && errors.emailVerification && <div className="field-error">{errors.emailVerification}</div>}
+            {touched.email && errors.emailVerification && (
+              <div className="field-error">{errors.emailVerification}</div>
+            )}
           </div>
 
           <div className="form-group">
@@ -513,7 +548,9 @@ export default function SignupPage() {
               onBlur={handleBlur}
               placeholder="Create a strong password"
             />
-            {touched.password && errors.password && <div className="field-error">{errors.password}</div>}
+            {touched.password && errors.password && (
+              <div className="field-error">{errors.password}</div>
+            )}
           </div>
 
           <div className="form-group">
@@ -527,7 +564,9 @@ export default function SignupPage() {
               onBlur={handleBlur}
               placeholder="MIT, Stanford, etc."
             />
-            {touched.collegeName && errors.collegeName && <div className="field-error">{errors.collegeName}</div>}
+            {touched.collegeName && errors.collegeName && (
+              <div className="field-error">{errors.collegeName}</div>
+            )}
           </div>
 
           <div className="form-row">
@@ -542,28 +581,36 @@ export default function SignupPage() {
                 onBlur={handleBlur}
                 placeholder="2021CS001"
               />
-              {touched.rollNumber && errors.rollNumber && <div className="field-error">{errors.rollNumber}</div>}
+              {touched.rollNumber && errors.rollNumber && (
+                <div className="field-error">{errors.rollNumber}</div>
+              )}
             </div>
 
             <div className="form-group">
               <label>Year *</label>
               <div className="pill-selector">
-                {["1st Year", "2nd Year", "3rd Year", "4th Year"].map((year) => (
-                  <button
-                    key={year}
-                    type="button"
-                    className={`year-pill ${formData.year === year ? "selected" : ""}`}
-                    onClick={() => {
-                      setFormData({ ...formData, year })
-                      setTouched((prev) => ({ ...prev, year: true }))
-                      setErrors((prev) => ({ ...prev, year: "" }))
-                    }}
-                  >
-                    {year}
-                  </button>
-                ))}
+                {["1st Year", "2nd Year", "3rd Year", "4th Year"].map(
+                  (year) => (
+                    <button
+                      key={year}
+                      type="button"
+                      className={`year-pill ${
+                        formData.year === year ? "selected" : ""
+                      }`}
+                      onClick={() => {
+                        setFormData({ ...formData, year });
+                        setTouched((prev) => ({ ...prev, year: true }));
+                        setErrors((prev) => ({ ...prev, year: "" }));
+                      }}
+                    >
+                      {year}
+                    </button>
+                  )
+                )}
               </div>
-              {touched.year && errors.year && <div className="field-error">{errors.year}</div>}
+              {touched.year && errors.year && (
+                <div className="field-error">{errors.year}</div>
+              )}
             </div>
           </div>
 
@@ -582,19 +629,23 @@ export default function SignupPage() {
                 <button
                   key={dept.code}
                   type="button"
-                  className={`department-pill ${formData.department === dept.code ? "selected" : ""}`}
+                  className={`department-pill ${
+                    formData.department === dept.code ? "selected" : ""
+                  }`}
                   style={{ "--dept-color": dept.color }}
                   onClick={() => {
-                    setFormData({ ...formData, department: dept.code })
-                    setTouched((prev) => ({ ...prev, department: true }))
-                    setErrors((prev) => ({ ...prev, department: "" }))
+                    setFormData({ ...formData, department: dept.code });
+                    setTouched((prev) => ({ ...prev, department: true }));
+                    setErrors((prev) => ({ ...prev, department: "" }));
                   }}
                 >
                   {dept.name}
                 </button>
               ))}
             </div>
-            {touched.department && errors.department && <div className="field-error">{errors.department}</div>}
+            {touched.department && errors.department && (
+              <div className="field-error">{errors.department}</div>
+            )}
           </div>
 
           <div className="form-group">
@@ -608,21 +659,35 @@ export default function SignupPage() {
               placeholder="Tell us about yourself..."
               rows="3"
             />
-            {touched.bio && errors.bio && <div className="field-error">{errors.bio}</div>}
+            {touched.bio && errors.bio && (
+              <div className="field-error">{errors.bio}</div>
+            )}
           </div>
 
           <div className="form-group">
             <label>Profile Picture *</label>
             <div className="file-input-wrapper">
               <label htmlFor="profilePicture" className="file-input-label">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="17 8 12 3 7 8" />
                   <line x1="12" y1="3" x2="12" y2="15" />
                 </svg>
                 {fileName || "Upload profile picture"}
               </label>
-              <input type="file" id="profilePicture" accept="image/*" onChange={handleFileChange} />
+              <input
+                type="file"
+                id="profilePicture"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
             </div>
             {fileName && <div className="file-name">Selected: {fileName}</div>}
             {touched.profilePicture && errors.profilePicture && (
@@ -632,14 +697,24 @@ export default function SignupPage() {
 
           <div className="form-group">
             <label>Interests *</label>
-            <p className="skills-subtitle">Areas you want to grow in or are passionate about</p>
+            <p className="skills-subtitle">
+              Areas you want to grow in or are passionate about
+            </p>
 
             {interests.length > 0 && (
               <div className="selected-tags-display">
                 {interests.map((interest, index) => (
-                  <span key={index} className="selected-tag-pill" style={{ "--tag-color": interest.color }}>
+                  <span
+                    key={index}
+                    className="selected-tag-pill"
+                    style={{ "--tag-color": interest.color }}
+                  >
                     {interest.name}
-                    <button type="button" className="tag-pill-remove" onClick={() => removeInterest(index)}>
+                    <button
+                      type="button"
+                      className="tag-pill-remove"
+                      onClick={() => removeInterest(index)}
+                    >
                       ×
                     </button>
                   </span>
@@ -654,8 +729,8 @@ export default function SignupPage() {
                 value={interestInput}
                 onChange={handleInterestInputChange}
                 onFocus={() => {
-                  setShowInterestSuggestions(interestInput.length > 0)
-                  setTouched((prev) => ({ ...prev, interests: true }))
+                  setShowInterestSuggestions(interestInput.length > 0);
+                  setTouched((prev) => ({ ...prev, interests: true }));
                 }}
                 placeholder="Search or select interests Ex:Web-dev,Robotics,Hackathons"
               />
@@ -675,7 +750,9 @@ export default function SignupPage() {
                 </div>
               )}
             </div>
-            {touched.interests && errors.interests && <div className="field-error">{errors.interests}</div>}
+            {touched.interests && errors.interests && (
+              <div className="field-error">{errors.interests}</div>
+            )}
           </div>
 
           <div className="form-group">
@@ -685,9 +762,17 @@ export default function SignupPage() {
             {selectedSkills.length > 0 && (
               <div className="selected-tags-display">
                 {selectedSkills.map((skill) => (
-                  <span key={skill.name} className="selected-tag-pill" style={{ "--tag-color": skill.color }}>
+                  <span
+                    key={skill.name}
+                    className="selected-tag-pill"
+                    style={{ "--tag-color": skill.color }}
+                  >
                     {skill.name}
-                    <button type="button" className="tag-pill-remove" onClick={() => removeSkill(skill)}>
+                    <button
+                      type="button"
+                      className="tag-pill-remove"
+                      onClick={() => removeSkill(skill)}
+                    >
                       ×
                     </button>
                   </span>
@@ -702,13 +787,17 @@ export default function SignupPage() {
                 value={skillSearchInput}
                 onChange={handleSkillSearchChange}
                 onFocus={() => {
-                  handleSkillFocus()
-                  setTouched((prev) => ({ ...prev, skills: true }))
+                  handleSkillFocus();
+                  setTouched((prev) => ({ ...prev, skills: true }));
                 }}
                 placeholder=" Search or select skills  "
               />
               {showSkillDropdown && filteredSkills.length > 0 && (
-                <div className={`suggestions-dropdown ${skillDropdownDirection === "up" ? "dropdown-up" : ""}`}>
+                <div
+                  className={`suggestions-dropdown ${
+                    skillDropdownDirection === "up" ? "dropdown-up" : ""
+                  }`}
+                >
                   {filteredSkills.map((skill) => (
                     <button
                       key={skill.name}
@@ -723,10 +812,16 @@ export default function SignupPage() {
                 </div>
               )}
             </div>
-            {touched.skills && errors.skills && <div className="field-error">{errors.skills}</div>}
+            {touched.skills && errors.skills && (
+              <div className="field-error">{errors.skills}</div>
+            )}
           </div>
 
-          <button type="submit" className="submit-button" disabled={!isFormValid()}>
+          <button
+            type="submit"
+            className="submit-button"
+            disabled={!isFormValid()}
+          >
             {isFormValid() ? "Create Account" : "Complete All Required Fields"}
           </button>
         </form>
@@ -736,5 +831,5 @@ export default function SignupPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,0 +1,284 @@
+.container {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 300;
+  color: #262626;
+  margin: 0 0 24px 0;
+  letter-spacing: -0.5px;
+}
+
+.timeframeTabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.tabButton {
+  padding: 12px 24px;
+  border: none;
+  background: none;
+  color: #8e8e8e;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease;
+  margin-bottom: -1px;
+}
+
+.tabButton:hover {
+  color: #262626;
+}
+
+.tabButtonActive {
+  color: #262626;
+  border-bottom-color: #262626;
+}
+
+.leaderboard {
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.leaderboardItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #efefef;
+  transition: background-color 0.2s ease;
+}
+
+.leaderboardItem:last-child {
+  border-bottom: none;
+}
+
+.leaderboardItem:hover {
+  background-color: #fafafa;
+}
+
+.topThree {
+  background-color: #fefce8;
+}
+
+.rankSection {
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.medal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rankNumber {
+  font-size: 18px;
+  font-weight: 600;
+  color: #8e8e8e;
+}
+
+.userSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid #dbdbdb;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.userName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0 0 4px 0;
+}
+
+.userUsername {
+  font-size: 14px;
+  color: #8e8e8e;
+  margin: 0 0 8px 0;
+}
+
+.badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 4px 8px;
+  background-color: #efefef;
+  color: #262626;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pointsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.pointsValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: #262626;
+}
+
+.pointsLabel {
+  font-size: 12px;
+  color: #8e8e8e;
+}
+
+.change {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.changeUp {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.changeDown {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.changeNew {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.infoSection {
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.infoTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0 0 20px 0;
+}
+
+.pointRules {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ruleIcon {
+  font-size: 24px;
+  width: 40px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.rule div {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ruleAction {
+  font-size: 14px;
+  color: #262626;
+  font-weight: 500;
+}
+
+.rulePoints {
+  font-size: 14px;
+  color: #0095f6;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .leaderboardItem {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .rankSection {
+    width: 50px;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .userName {
+    font-size: 14px;
+  }
+
+  .userUsername {
+    font-size: 12px;
+  }
+
+  .pointsValue {
+    font-size: 18px;
+  }
+}
+
+

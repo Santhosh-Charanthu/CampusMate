@@ -1,0 +1,296 @@
+.container {
+  min-height: 100vh;
+  background-color: #fafafa;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.card {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #262626;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: #fafafa;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0;
+}
+
+.form {
+  padding: 24px;
+}
+
+.formSection {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 8px;
+}
+
+.requiredIndicator {
+  color: #ed4956;
+  font-size: 12px;
+}
+
+.optionalLabel {
+  font-size: 12px;
+  font-weight: 400;
+  color: #8e8e8e;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  color: #262626;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: #0095f6;
+}
+
+.inputError,
+.textareaError {
+  border-color: #ed4956;
+}
+
+.inputError:focus,
+.textareaError:focus {
+  border-color: #ed4956;
+  box-shadow: 0 0 0 3px rgba(237, 73, 86, 0.1);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.radioLabel:hover {
+  background-color: #fafafa;
+}
+
+.radioLabel input[type="radio"] {
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.radioLabel input[type="radio"]:checked + .radioContent {
+  color: #0095f6;
+}
+
+.radioContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.radioTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.radioDescription {
+  font-size: 12px;
+  color: #8e8e8e;
+}
+
+.fileUpload {
+  position: relative;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px dashed #dbdbdb;
+  border-radius: 8px;
+  background-color: #fafafa;
+  color: #262626;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.fileLabel:hover {
+  border-color: #0095f6;
+  background-color: #f0f9ff;
+}
+
+.fileLabelError {
+  border-color: #ed4956;
+  background-color: #fee;
+}
+
+.charCount {
+  text-align: right;
+  font-size: 12px;
+  color: #8e8e8e;
+  margin-top: 6px;
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  color: #ed4956;
+  font-size: 13px;
+}
+
+.errorIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.fileInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  color: #166534;
+  font-size: 13px;
+}
+
+.successIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: #16a34a;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #dbdbdb;
+}
+
+.cancelButton {
+  flex: 1;
+  padding: 12px 24px;
+  border: 1px solid #dbdbdb;
+  background-color: #ffffff;
+  color: #262626;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #fafafa;
+}
+
+.submitButton {
+  flex: 1;
+  padding: 12px 24px;
+  border: none;
+  background-color: #0095f6;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitButton:hover {
+  background-color: #1877f2;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 16px;
+  }
+
+  .form {
+    padding: 20px;
+  }
+}
+
