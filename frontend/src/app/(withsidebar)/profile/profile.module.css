@@ -1,4 +1,4 @@
-/* Profile Page Styles - Pure CSS */
+/* Profile Page Styles - Instagram-like Design */
 
 .container {
   min-height: 100vh;
@@ -7,143 +7,463 @@
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Profile Header Section */
 .profileHeader {
   background-color: #ffffff;
-  padding: 40px 20px;
-  border-bottom: 1px solid #efefef;
+  padding: 0;
+  border-bottom: 1px solid #dbdbdb;
 }
 
 .profileHeaderContent {
-  max-width: 600px;
+  max-width: 935px;
   margin: 0 auto;
+  padding: 30px 20px 44px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
 }
 
-/* Profile Picture with Edit Button */
+/* Profile Picture */
 .avatarContainer {
+  flex-shrink: 0;
   position: relative;
-  margin-bottom: 20px;
 }
 
 .avatar {
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #ffffff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
-.editButton {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #0095f6;
-  border: 3px solid #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 149, 246, 0.4);
+  transition: transform 0.2s ease;
 }
 
-.editButton:hover {
-  background-color: #0077cc;
-  transform: scale(1.05);
+.avatar:hover {
+  transform: scale(1.02);
 }
 
-.editIcon {
-  width: 16px;
-  height: 16px;
-  color: #ffffff;
+/* User Info Section */
+.userInfoSection {
+  flex: 1;
+  min-width: 0;
 }
 
-/* User Info */
-.userInfo {
-  margin-bottom: 24px;
-}
-
-.displayName {
-  font-size: 24px;
-  font-weight: 600;
-  color: #262626;
-  margin: 0 0 8px 0;
-  letter-spacing: -0.5px;
-}
-
-.bio {
-  font-size: 15px;
-  color: #737373;
-  line-height: 1.5;
-  margin: 0;
-  max-width: 400px;
-  padding: 0 10px;
-}
-
-/* Stats Section */
-.stats {
+.usernameRow {
   display: flex;
-  gap: 48px;
-  justify-content: center;
-}
-
-.statItem {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 20px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.statNumber {
-  font-size: 20px;
-  font-weight: 700;
-  color: #262626;
-}
-
-.statLabel {
-  font-size: 14px;
-  color: #737373;
-  font-weight: 400;
-}
-
-/* Posts Grid Section */
-.postsSection {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.sectionTitle {
-  font-size: 14px;
-  font-weight: 600;
-  color: #262626;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0 0 16px 0;
+.usernameContainer {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.sectionIcon {
-  width: 16px;
-  height: 16px;
+.username {
+  font-size: 28px;
+  font-weight: 300;
+  color: #262626;
+  margin: 0;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+}
+
+.verifiedBadge {
+  width: 20px;
+  height: 20px;
+  color: #0095f6;
+  flex-shrink: 0;
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editProfileButton {
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  background-color: transparent;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.editProfileButton:hover {
+  background-color: #fafafa;
+  border-color: #dbdbdb;
+}
+
+.editProfileButton:active {
+  background-color: #efefef;
+  transform: scale(0.98);
+}
+
+.editProfileButton.following {
+  background-color: #efefef;
+}
+
+.editProfileButton.following:hover {
+  background-color: #dbdbdb;
+  color: #ed4956;
+}
+
+.messageButton {
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #262626;
+  background-color: transparent;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.messageButton:hover {
+  background-color: #fafafa;
+  border-color: #dbdbdb;
+}
+
+.messageButton:active {
+  background-color: #efefef;
+  transform: scale(0.95);
+}
+
+.messageIcon {
+  width: 18px;
+  height: 18px;
+  color: #262626;
+}
+
+.moreButton {
+  padding: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #262626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+}
+
+.moreButton:hover {
+  background-color: #fafafa;
+}
+
+.moreButton:active {
+  background-color: #efefef;
+  transform: scale(0.95);
+}
+
+.moreIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.shareButton {
+  padding: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #262626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+.shareButton:hover {
+  background-color: #fafafa;
+}
+
+.shareButton:active {
+  background-color: #efefef;
+  transform: scale(0.95);
+}
+
+.shareButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Stats Section */
+.stats {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.statItem:hover {
+  opacity: 0.7;
+}
+
+.statItem:active {
+  transform: scale(0.98);
+}
+
+.statNumber {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.statLabel {
+  font-size: 16px;
+  color: #262626;
+  font-weight: 400;
+}
+
+/* Bio Section */
+.bioSection {
+  margin-top: 0;
+}
+
+.displayName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  margin: 0 0 6px 0;
+  line-height: 1.5;
+}
+
+.bio {
+  font-size: 16px;
+  color: #262626;
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+/* Story Highlights Section */
+.highlightsSection {
+  max-width: 935px;
+  margin: 0 auto;
+  padding: 20px 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dbdbdb;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.highlightsSection::-webkit-scrollbar {
+  display: none;
+}
+
+.highlightsContainer {
+  display: flex;
+  gap: 24px;
+  padding: 0 20px;
+  min-width: max-content;
+}
+
+.highlightItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+  min-width: 80px;
+}
+
+.highlightItem:hover {
+  transform: translateY(-2px);
+}
+
+.highlightItem:active {
+  transform: translateY(0);
+}
+
+.highlightCircle {
+  width: 77px;
+  height: 77px;
+  border-radius: 50%;
+  border: 2px solid #dbdbdb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  padding: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.highlightCircle::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  z-index: 1;
+}
+
+.highlightImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+
+.highlightPlus {
+  font-size: 32px;
+  font-weight: 300;
+  color: #262626;
+  position: relative;
+  z-index: 2;
+}
+
+.highlightLabel {
+  font-size: 12px;
+  color: #262626;
+  text-align: center;
+  max-width: 77px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Posts Section */
+.postsSection {
+  max-width: 935px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.postsTabs {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #dbdbdb;
+  margin-top: 0;
+  background-color: #ffffff;
+  gap: 0;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-top: 2px solid transparent;
+  cursor: pointer;
+  color: #8e8e8e;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.2s ease;
+  margin-top: -1px;
+  position: relative;
+  flex: 1;
+  max-width: 311px;
+  justify-content: center;
+}
+
+.tabButtonActive {
+  color: #262626;
+  border-top-color: #262626;
+}
+
+.tabButton:hover {
+  color: #262626;
+}
+
+.tabButton:active {
+  transform: scale(0.98);
+}
+
+.tabIcon {
+  width: 12px;
+  height: 12px;
 }
 
 .postsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
+  gap: 0;
+  padding: 0;
+  border-top: 1px solid #dbdbdb;
+  transition: opacity 0.3s ease;
+}
+
+.postsGrid.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.loadingState {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #dbdbdb;
+  border-top-color: #262626;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .postItem {
@@ -152,13 +472,32 @@
   overflow: hidden;
   background-color: #efefef;
   cursor: pointer;
+  border-right: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.postItem:nth-child(3n) {
+  border-right: none;
 }
 
 .postImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
 }
 
 .postOverlay {
@@ -167,13 +506,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 30px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
+  z-index: 1;
 }
 
 .postItem:hover .postOverlay {
@@ -181,30 +521,34 @@
 }
 
 .postItem:hover .postImage {
-  transform: scale(1.02);
+  transform: scale(1.08);
 }
 
 .overlayStat {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   color: #ffffff;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .overlayIcon {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
 }
 
 /* Video indicator */
 .videoIndicator {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
   color: #ffffff;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  z-index: 1;
 }
 
 .videoIcon {
@@ -212,249 +556,195 @@
   height: 24px;
 }
 
+/* Empty State */
+.emptyState {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 2px solid #262626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.emptyIconSvg {
+  width: 24px;
+  height: 24px;
+  color: #262626;
+}
+
+.emptyTitle {
+  font-size: 28px;
+  font-weight: 300;
+  color: #262626;
+  margin: 0 0 8px 0;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: #8e8e8e;
+  margin: 0;
+  max-width: 350px;
+  line-height: 1.5;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-  .profileHeader {
-    padding: 30px 16px;
+  .profileHeaderContent {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    gap: 20px;
   }
 
   .avatar {
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 120px;
   }
 
-  .editButton {
-    width: 32px;
-    height: 32px;
+  .userInfoSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .editIcon {
-    width: 14px;
-    height: 14px;
+  .usernameRow {
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .displayName {
-    font-size: 20px;
+  .actionButtons {
+    width: 100%;
+    justify-content: center;
   }
 
-  .bio {
-    font-size: 14px;
+  .username {
+    font-size: 22px;
   }
 
   .stats {
-    gap: 36px;
+    justify-content: center;
+    gap: 30px;
   }
 
-  .statNumber {
-    font-size: 18px;
-  }
-
-  .statLabel {
-    font-size: 13px;
-  }
-
-  .postsSection {
-    padding: 16px;
+  .bioSection {
+    text-align: center;
+    width: 100%;
   }
 
   .postsGrid {
-    gap: 3px;
+    gap: 0;
   }
 
-  .overlayStat {
-    font-size: 12px;
-    gap: 4px;
+  .postItem {
+    border-right: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
   }
 
-  .overlayIcon {
-    width: 14px;
-    height: 14px;
+  .postItem:nth-child(3n) {
+    border-right: none;
+  }
+
+  .tabButton {
+    margin: 0 30px;
   }
 }
 
 @media (max-width: 480px) {
-  .profileHeader {
-    padding: 24px 12px;
+  .profileHeaderContent {
+    padding: 16px;
   }
 
   .avatar {
-    width: 90px;
-    height: 90px;
-    border-width: 3px;
+    width: 100px;
+    height: 100px;
   }
 
-  .editButton {
-    width: 28px;
-    height: 28px;
-    border-width: 2px;
+  .username {
+    font-size: 20px;
   }
 
-  .editIcon {
-    width: 12px;
-    height: 12px;
-  }
-
-  .displayName {
-    font-size: 18px;
-  }
-
-  .bio {
+  .editProfileButton {
     font-size: 13px;
-  }
-
-  .stats {
-    gap: 28px;
-  }
-
-  .statNumber {
-    font-size: 16px;
-  }
-
-  .statLabel {
-    font-size: 12px;
-  }
-
-  .postsSection {
-    padding: 12px;
-  }
-
-  .postsGrid {
-    gap: 2px;
-  }
-
-  .sectionTitle {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 360px) {
-  .profileHeader {
-    padding: 20px 10px;
-  }
-
-  .avatar {
-    width: 80px;
-    height: 80px;
-  }
-
-  .editButton {
-    width: 26px;
-    height: 26px;
-  }
-
-  .editIcon {
-    width: 11px;
-    height: 11px;
-  }
-
-  .avatarContainer {
-    margin-bottom: 16px;
-  }
-
-  .displayName {
-    font-size: 16px;
-  }
-
-  .bio {
-    font-size: 12px;
-    padding: 0 5px;
+    padding: 4px 8px;
   }
 
   .stats {
     gap: 20px;
   }
 
-  .statNumber {
+  .statNumber,
+  .statLabel {
     font-size: 14px;
   }
 
-  .statLabel {
-    font-size: 11px;
-  }
-
-  .postsSection {
-    padding: 8px;
-  }
-
-  .postsGrid {
-    gap: 2px;
-  }
-
-  .sectionTitle {
-    font-size: 11px;
-    margin-bottom: 12px;
-  }
-
-  .postOverlay {
-    gap: 12px;
-  }
-
-  .overlayStat {
-    font-size: 10px;
-    gap: 3px;
-  }
-
-  .overlayIcon {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-/* Extra small screens (300px) */
-@media (max-width: 320px) {
-  .container {
-    min-width: 300px;
-  }
-
-  .profileHeader {
-    padding: 16px 8px;
-  }
-
-  .avatar {
-    width: 70px;
-    height: 70px;
-  }
-
-  .editButton {
-    width: 24px;
-    height: 24px;
-  }
-
-  .editIcon {
-    width: 10px;
-    height: 10px;
-  }
-
   .displayName {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .bio {
-    font-size: 11px;
-  }
-
-  .stats {
-    gap: 16px;
-  }
-
-  .statNumber {
-    font-size: 13px;
-  }
-
-  .statLabel {
-    font-size: 10px;
-  }
-
-  .postsSection {
-    padding: 6px;
+    font-size: 14px;
   }
 
   .postsGrid {
-    gap: 1px;
+    gap: 0;
   }
 
-  .sectionTitle {
-    font-size: 10px;
-    margin-bottom: 10px;
+  .postItem {
+    border-right: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+  }
+
+  .postItem:nth-child(3n) {
+    border-right: none;
+  }
+
+  .tabButton {
+    margin: 0 20px;
+    font-size: 11px;
+  }
+
+  .overlayStat {
+    font-size: 14px;
+    gap: 5px;
+  }
+
+  .overlayIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .highlightsSection {
+    padding: 16px 0;
+  }
+
+  .highlightsContainer {
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .highlightCircle {
+    width: 64px;
+    height: 64px;
+  }
+
+  .highlightLabel {
+    font-size: 11px;
+    max-width: 64px;
   }
 }

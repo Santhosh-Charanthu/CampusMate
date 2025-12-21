@@ -21,9 +21,72 @@ export default function SignupPage() {
 
   const [currentInterest, setCurrentInterest] = useState("");
   const [currentSkill, setCurrentSkill] = useState("");
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
+  const validateEmail = (email) => {
+    if (!email) return "Email is required.";
+    if (!email.includes("@")) return "Email must contain @ symbol.";
+    if (!email.includes(".edu")) return "Email must be a valid .edu domain.";
+    return null;
+  };
+
+  const validatePassword = (password) => {
+    if (!password) return "Password is required.";
+    if (password.length < 8) return "Password must be at least 8 characters.";
+    return null;
+  };
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+    
+    // Validate on change
+    if (touched[name]) {
+      validateField(name, value);
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    validateField(name, value);
+  };
+
+  const validateField = (name, value) => {
+    const newErrors = { ...errors };
+
+    if (name === "email") {
+      const error = validateEmail(value);
+      if (error) {
+        newErrors.email = error;
+      } else {
+        delete newErrors.email;
+      }
+    }
+
+    if (name === "password") {
+      const error = validatePassword(value);
+      if (error) {
+        newErrors.password = error;
+      } else {
+        delete newErrors.password;
+      }
+    }
+
+    if (name === "name" && !value.trim()) {
+      newErrors.name = "Name is required.";
+    } else if (name === "name") {
+      delete newErrors.name;
+    }
+
+    if (name === "collegeName" && !value.trim()) {
+      newErrors.collegeName = "College name is required.";
+    } else if (name === "collegeName") {
+      delete newErrors.collegeName;
+    }
+
+    setErrors(newErrors);
   };
 
   const addInterest = (e) => {
@@ -60,7 +123,44 @@ export default function SignupPage() {
     });
   };
 
-  const handleSignup = async () => {
+  const handleSignup = async (e) => {
+    e?.preventDefault();
+    
+    // Mark all fields as touched
+    const allTouched = {};
+    Object.keys(form).forEach((key) => {
+      if (key !== "avatar" && key !== "interests" && key !== "skills") {
+        allTouched[key] = true;
+      }
+    });
+    setTouched(allTouched);
+
+    // Validate all required fields
+    const newErrors = {};
+    
+    if (!form.name.trim()) {
+      newErrors.name = "Name is required.";
+    }
+    
+    const emailError = validateEmail(form.email);
+    if (emailError) {
+      newErrors.email = emailError;
+    }
+    
+    const passwordError = validatePassword(form.password);
+    if (passwordError) {
+      newErrors.password = passwordError;
+    }
+    
+    if (!form.collegeName.trim()) {
+      newErrors.collegeName = "College name is required.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     const formData = new FormData();
 
     Object.keys(form).forEach((key) => {
@@ -73,48 +173,96 @@ export default function SignupPage() {
       }
     });
 
-    const res = await fetch("http://localhost:5000/register", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      const res = await fetch("http://localhost:5000/register", {
+        method: "POST",
+        body: formData,
+      });
 
-    const data = await res.json();
-    alert(data.success ? "Signup Successful!" : data.error);
+      const data = await res.json();
+      if (data.success) {
+        alert("Signup Successful!");
+      } else {
+        setErrors({ submit: data.error || "Signup failed. Please try again." });
+      }
+    } catch (error) {
+      setErrors({ submit: "Network error. Please check your connection." });
+    }
   };
 
   return (
     <div className="auth-container">
       <h2 className="auth-title">Signup</h2>
 
-      <input
-        name="name"
-        type="text"
-        placeholder="Full Name"
-        className="auth-input"
-        onChange={handleChange}
-      />
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        className="auth-input"
-        onChange={handleChange}
-      />
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        className="auth-input"
-        onChange={handleChange}
-      />
+      <div>
+        <input
+          name="name"
+          type="text"
+          placeholder="Full Name *"
+          className={`auth-input ${touched.name && errors.name ? "auth-input-error" : ""}`}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          required
+        />
+        {touched.name && errors.name && (
+          <div className="auth-error">{errors.name}</div>
+        )}
+      </div>
 
-      <input
-        name="collegeName"
-        type="text"
-        placeholder="College Name"
-        className="auth-input"
-        onChange={handleChange}
-      />
+      <div>
+        <input
+          name="email"
+          type="email"
+          placeholder="Email (.edu domain) *"
+          className={`auth-input ${touched.email && errors.email ? "auth-input-error" : ""}`}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          required
+        />
+        {touched.email && errors.email && (
+          <div className="auth-error">{errors.email}</div>
+        )}
+        {!errors.email && form.email && (
+          <div className="auth-hint">
+            Make sure your email ends with .edu domain
+          </div>
+        )}
+      </div>
+
+      <div>
+        <input
+          name="password"
+          type="password"
+          placeholder="Password (min 8 characters) *"
+          className={`auth-input ${touched.password && errors.password ? "auth-input-error" : ""}`}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          required
+        />
+        {touched.password && errors.password && (
+          <div className="auth-error">{errors.password}</div>
+        )}
+        {!errors.password && form.password && form.password.length < 8 && (
+          <div className="auth-warning">
+            Password must be at least 8 characters long
+          </div>
+        )}
+      </div>
+
+      <div>
+        <input
+          name="collegeName"
+          type="text"
+          placeholder="College Name *"
+          className={`auth-input ${touched.collegeName && errors.collegeName ? "auth-input-error" : ""}`}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          required
+        />
+        {touched.collegeName && errors.collegeName && (
+          <div className="auth-error">{errors.collegeName}</div>
+        )}
+      </div>
       <input
         name="rollNumber"
         type="text"
@@ -190,6 +338,10 @@ export default function SignupPage() {
           onKeyDown={addSkill}
         />
       </div>
+
+      {errors.submit && (
+        <div className="auth-error auth-error-submit">{errors.submit}</div>
+      )}
 
       <button className="auth-btn" onClick={handleSignup}>
         Create Account

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "auxly": {
+      "command": "node",
+      "args": [
+        "c:\\Users\\DELL PRECISION 5510\\.vscode\\extensions\\tzamun-arabia.auxly-extension-0.1.8\\dist\\mcp-server\\index.js"
+      ],
+      "env": {
+        "AUXLY_WORKSPACE_PATH": "c:\\Users\\DELL PRECISION 5510\\CampusMate",
+        "AUXLY_API_URL": "https://auxly.tzamun.com"
+      }
+    }
+  }
+}
