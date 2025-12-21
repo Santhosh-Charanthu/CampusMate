@@ -1,116 +1,722 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .auth-container {
-  width: 100%;
-  max-width: 380px;
-  margin: 130px auto;
-  padding: 28px;
-  background: #ffffff;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, white 0%, white 100%);
+  padding: 20px;
 }
 
-.auth-title {
-  font-size: 26px;
+.auth-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 480px;
+  padding: 40px;
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-logo h1 {
+  font-size: 28px;
   font-weight: 700;
-  color: #000;
-  text-align: center;
-  margin-bottom: 22px;
+  color: #1a1a1a;
+  margin-bottom: 8px;
 }
 
-.auth-label {
-  color: #000;
-  font-weight: 600;
-  margin: 8px 0 4px;
-  display: block;
+.auth-logo p {
+  font-size: 14px;
+  color: #666;
 }
 
-.auth-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 14px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #222;
-  font-size: 15px;
-  outline: none;
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.auth-input:focus {
-  border-color: #000;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.auth-btn {
-  width: 100%;
-  padding: 12px;
-  background: #000;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.2s ease;
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-.auth-btn:hover {
-  background: #333;
-}
-
-.auth-link {
-  margin-top: 14px;
-  text-align: center;
-  font-size: 15px;
-  color: #444;
-}
-
-.auth-link a {
-  color: #000;
+.form-group label {
+  font-size: 14px;
   font-weight: 500;
-  text-decoration: underline;
+  color: #333;
 }
 
-/* Tag Input Areas */
-
-.tag-container {
-  border: 1px solid #ddd;
-  padding: 10px;
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  min-height: 55px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.file-input-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.file-input-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  color: #666;
+}
+
+.file-input-label:hover {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.file-input-wrapper input[type="file"] {
+  position: absolute;
+  left: -9999px;
+}
+
+.file-name {
+  font-size: 12px;
+  color: #667eea;
+  margin-top: 4px;
+}
+
+.tags-container {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  background: #f2f2f2;
-}
-
-.tag-container input {
-  border: none !important;
-  background: transparent !important;
-  flex: 1;
-  padding: 6px;
-  min-width: 120px;
-  margin: 0 !important;
-  color: #222;
-}
-
-.tag-container input:focus {
-  outline: none;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  min-height: 46px;
+  cursor: text;
 }
 
 .tag {
-  background: #000;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
+  background: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #333;
 }
 
-.tag button {
-  background: transparent;
+.tag-remove {
+  background: none;
   border: none;
-  color: #fff;
+  color: #666;
   cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.tag-remove:hover {
+  color: #333;
+}
+
+.tags-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 6px;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.oauth-button {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.oauth-button:hover {
+  background: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 24px 0;
+  color: #999;
+  font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.divider span {
+  padding: 0 16px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 14px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-button:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #666;
+}
+
+.auth-footer a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Added styles for predefined skills multi-select UI */
+.skills-subtitle {
   font-size: 13px;
+  color: #666;
+  margin-top: -4px;
+  margin-bottom: 12px;
+}
+
+.skills-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skills-category {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.category-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid var(--skill-color);
+  background: transparent;
+  color: #333;
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.skill-tag.selected {
+  background: var(--skill-color);
+  color: #fff;
+}
+
+.skill-check {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.selected-skills-summary {
+  margin-top: 12px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.selected-skills-summary strong {
+  color: #667eea;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Added styles for searchable dropdown UI */
+.searchable-input-wrapper {
+  position: relative;
+}
+
+.searchable-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.searchable-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.suggestion-item {
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  background: white;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: #333;
+  border-left: 3px solid var(--tag-color);
+}
+
+.suggestion-item:hover {
+  background: rgba(102, 126, 234, 0.08);
+}
+
+.suggestion-item:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.suggestion-item:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.selected-tags-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  min-height: 48px;
+}
+
+.selected-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--tag-color);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.tag-pill-remove {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  margin-left: 2px;
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.tag-pill-remove:hover {
+  opacity: 1;
+}
+
+/* Added styles for Year pill selector */
+.pill-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.year-pill {
+  flex: 1;
+  min-width: 60px;
+  padding: 10px 12px;
+  border: 2px solid #b5e7f8;
+  background: #f0faff;
+  color: #333;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.year-pill:hover {
+  background: #d5f2ff;
+  border-color: #90ddf5;
+  transform: translateY(-1px);
+}
+
+.year-pill.selected {
+  background: #b5e7f8;
+  border-color: #7fd5f2;
+  color: #0a4d6b;
+  font-weight: 600;
+}
+
+/* Added styles for Department pill selector */
+.department-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.department-pill {
+  flex: 1;
+  min-width: 80px;
+  padding: 10px 14px;
+  border: 2px solid var(--dept-color);
+  background: #ffffff;
+  color: #333;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.department-pill:hover {
+  background: var(--dept-color);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.department-pill.selected {
+  background: var(--dept-color);
+  border-color: var(--dept-color);
+  color: #1a1a1a;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Added styles for Email OTP verification UI */
+.email-otp-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.verified-input {
+  background: #f0fdf4 !important;
+  border-color: #86efac !important;
+}
+
+.verified-badge {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #22c55e;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.send-otp-button {
+  margin-top: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.send-otp-button:hover:not(:disabled) {
+  background: #5568d3;
+  transform: translateY(-1px);
+}
+
+.send-otp-button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.otp-input-section {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.otp-input-section label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.otp-verify-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.otp-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-align: center;
+  font-family: monospace;
+  transition: all 0.2s ease;
+}
+
+.otp-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.verify-otp-button {
+  padding: 10px 20px;
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.verify-otp-button:hover:not(:disabled) {
+  background: #16a34a;
+  transform: translateY(-1px);
+}
+
+.verify-otp-button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.otp-success {
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #86efac;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.otp-error {
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.submit-button:disabled {
+  background: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-button:disabled:hover {
+  background: #cbd5e1;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Added styles for inline validation error messages */
+.field-error {
+  font-size: 13px;
+  color: #dc2626;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.field-error::before {
+  content: "⚠";
+  font-size: 14px;
+}
+
+/* Added styles for position-aware dropdown (opens upward when needed) */
+.dropdown-up {
+  top: auto !important;
+  bottom: 100% !important;
+  margin-top: 0 !important;
+  margin-bottom: 4px !important;
+}
+
+@media (max-width: 640px) {
+  .auth-card {
+    padding: 30px 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-logo h1 {
+    font-size: 24px;
+  }
+
+  .suggestions-dropdown {
+    max-height: 180px;
+  }
+
+  /* Responsive adjustments for year pills */
+  .year-pill {
+    flex: 1 1 calc(50% - 4px);
+  }
+
+  /* Responsive adjustments for department pills */
+  .department-pill {
+    flex: 1 1 calc(50% - 4px);
+  }
+
+  .otp-verify-wrapper {
+    flex-direction: column;
+  }
+
+  .verify-otp-button {
+    width: 100%;
+  }
 }

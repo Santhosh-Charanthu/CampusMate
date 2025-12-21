@@ -35,10 +35,13 @@ export default function Sidebar({ onNotificationsClick }) {
           Messaging
         </li>
 
-        <li>
-          <Trophy size={22} className={styles.icon} />
-          Leaderboard
-        </li>
+        <Link href="/leaderboard">
+  <li>
+    <Trophy size={22} className={styles.icon} />
+    Leaderboard
+  </li>
+</Link>
+
 
         {/* <li>
           <Search size={22} className={styles.icon} />
