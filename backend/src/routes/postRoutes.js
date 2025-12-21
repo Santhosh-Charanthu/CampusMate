@@ -29,7 +29,6 @@ router.get("/:postId/comments", requireAuth, commentController.getComments);
 // Create Post (Uses dummy upload for now)
 // router.post("/", requireAuth, upload.array("media"), postController.createPost);
 // NEW (Temporary Test)
-router.post("/", requireAuth, postController.createPost);
 
 router.post(
   "/:userId",

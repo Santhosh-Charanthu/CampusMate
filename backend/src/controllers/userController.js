@@ -1,10 +1,5 @@
 const User = require("../models/User");
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/nagasai
 // ... existing getMutuals code ...
 
 /*
@@ -39,15 +34,11 @@ exports.followUser = async (req, res, next) => {
       await currentUser.save();
       await targetUser.save();
 
-<<<<<<< HEAD
-      return res.json({ success: true, message: "Unfollowed user", isFollowing: false });
-=======
       return res.json({
         success: true,
         message: "Unfollowed user",
         isFollowing: false,
       });
->>>>>>> origin/nagasai
     } else {
       // FOLLOW LOGIC
       // 1. Add target to my 'following'
@@ -57,18 +48,12 @@ exports.followUser = async (req, res, next) => {
       await currentUser.save();
       await targetUser.save();
 
-<<<<<<< HEAD
-      return res.json({ success: true, message: "Followed user", isFollowing: true });
-    }
-
-=======
       return res.json({
         success: true,
         message: "Followed user",
         isFollowing: true,
       });
     }
->>>>>>> origin/nagasai
   } catch (err) {
     next(err);
   }
@@ -80,49 +65,27 @@ exports.getMutuals = async (req, res, next) => {
     const currentUserId = req.user._id;
 
     // 1. Get the current user's following list
-<<<<<<< HEAD
-    const currentUser = await User.findById(currentUserId).select("social.following");
-
-    if (!currentUser) return res.status(404).json({ message: "User not found" });
-=======
     const currentUser = await User.findById(currentUserId).select(
       "social.following"
     );
 
     if (!currentUser)
       return res.status(404).json({ message: "User not found" });
->>>>>>> origin/nagasai
 
     // 2. Find users who:
     //    a) Are in MY 'following' list
     //    b) Have ME in THEIR 'following' list (Mutual)
     const mutuals = await User.find({
       _id: { $in: currentUser.social.following },
-<<<<<<< HEAD
-      "social.following": currentUserId // They must follow me back
-    })
-    .select("name profile.avatarUrl profile.department"); // Select only what's needed for the UI
-=======
       "social.following": currentUserId, // They must follow me back
     }).select("name profile.avatarUrl profile.department"); // Select only what's needed for the UI
->>>>>>> origin/nagasai
 
     return res.json({
       success: true,
       count: mutuals.length,
-<<<<<<< HEAD
-      users: mutuals
-    });
-
-  } catch (err) {
-    next(err);
-  }
-};
-=======
       users: mutuals,
     });
   } catch (err) {
     next(err);
   }
 };
->>>>>>> origin/nagasai

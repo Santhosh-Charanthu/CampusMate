@@ -6,26 +6,6 @@
  * POST /api/posts
  */
 
-<<<<<<< HEAD
-
-const Post = require("../models/Post")
-
-exports.createPost = async (req, res, next) => {
-  try {
-    const { caption, visibility, groupId } = req.body;
-    
-    // Simple check since we removed the file uploader for testing
-    const type = "text"; 
-    const mediaUrls = []; 
-
-    const newPost = new Post({
-      owner: req.user._id, 
-      caption,
-      mediaUrls,
-      visibility: visibility || "public",
-      groupId: groupId || null,
-      type,
-=======
 const Post = require("../models/Post");
 const User = require("../models/User");
 const cloudinary = require("../config/cloudinary");
@@ -111,44 +91,27 @@ exports.createPost = async (req, res, next) => {
       visibility,
       groupId,
       type, // ✅ now valid enum value
->>>>>>> origin/nagasai
     });
 
     await newPost.save();
 
-<<<<<<< HEAD
-    // Populate owner details for immediate UI update
-=======
     await User.findByIdAndUpdate(req.user._id, {
       $push: { posts: newPost._id },
     });
 
->>>>>>> origin/nagasai
     await newPost.populate("owner", "name profile.avatarUrl");
 
     return res.status(201).json({
       success: true,
-<<<<<<< HEAD
-      post: newPost,
-    });
-
-=======
       userId: req.user._id,
       postId: newPost._id,
       post: newPost,
     });
->>>>>>> origin/nagasai
   } catch (err) {
     next(err);
   }
 };
 
-<<<<<<< HEAD
-/*
- * GET FEED (All Public Posts)
- * GET /api/posts
- */
-=======
 exports.editPost = async (req, res, next) => {
   try {
     const { postId } = req.params;
@@ -290,30 +253,19 @@ exports.deletePost = async (req, res, next) => {
     next(err);
   }
 };
->>>>>>> origin/nagasai
 exports.getFeed = async (req, res, next) => {
   try {
     const posts = await Post.find({ visibility: "public" })
       .sort({ createdAt: -1 })
-<<<<<<< HEAD
-      .populate("owner", "name profile.avatarUrl college.name") 
-      .populate("likes", "name") 
-      .limit(20); 
-=======
       .populate("owner", "name profile.avatarUrl college.name")
       .populate("likes", "name")
       .limit(20);
->>>>>>> origin/nagasai
 
     return res.json({
       success: true,
       count: posts.length,
       posts,
     });
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/nagasai
   } catch (err) {
     next(err);
   }
@@ -347,16 +299,6 @@ exports.toggleLike = async (req, res, next) => {
 
     return res.json({
       success: true,
-<<<<<<< HEAD
-      isLiked,              
-      likesCount: post.likes.length 
-    });
-
-  } catch (err) {
-    next(err);
-  }
-};
-=======
       isLiked,
       likesCount: post.likes.length,
     });
@@ -364,4 +306,3 @@ exports.toggleLike = async (req, res, next) => {
     next(err);
   }
 };
->>>>>>> origin/nagasai

@@ -1,74 +1,54 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Added your router
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-
 import "../auth.css";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
+
+  // Using your form state structure
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-    setErrors((prev) => ({ ...prev, [name]: null }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleBlur = (e) => {
-    const { name, value } = e.target;
-    setTouched((prev) => ({ ...prev, [name]: true }));
-
-    if (!value.trim()) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: `${name === "email" ? "Email" : "Password"} is required.`,
-      }));
-    }
-  };
-
-  const handleLogin = async (e) => {
-    e?.preventDefault();
-
-    const newErrors = {};
-
-    if (!form.email.trim()) {
-      newErrors.email = "Email is required.";
-    } else if (!form.email.includes("@")) {
-      newErrors.email = "Please enter a valid email address.";
-    }
-
-    if (!form.password.trim()) {
-      newErrors.password = "Password is required.";
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      setTouched({ email: true, password: true });
-      return;
-    }
+  // Your Backend Logic integrated here
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
       const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(formData), // Matches your friend's state name
       });
 
       const data = await res.json();
 
-      if (data.success || data.token) {
-        // Handle successful login
-        console.log("Login successful");
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        console.log("Logged in user:", data.user);
+        router.push("/dashboard");
       } else {
-        setErrors({ submit: data.error || "Invalid email or password." });
+        alert(data.message || "Login failed");
       }
     } catch (error) {
-      setErrors({ submit: "Network error. Please check your connection." });
+      console.error("Login error:", error);
+      alert("Server is not responding");
     }
+  };
+
+  const handleGoogleLogin = () => {
+    console.log("Google login initiated");
   };
 
   return (
@@ -79,49 +59,31 @@ export default function LoginPage() {
           <p>Welcome back! Log in to your account</p>
         </div>
 
-        <div>
-          <input
-            name="email"
-            type="email"
-            placeholder="Email *"
-            value={form.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={`auth-input ${
-              touched.email && errors.email ? "auth-input-error" : ""
-            }`}
-            required
-          />
-          {touched.email && errors.email && (
-            <div className="auth-error">{errors.email}</div>
-          )}
-        </div>
-
-        <div>
-          <input
-            name="password"
-            type="password"
-            placeholder="Password *"
-            value={form.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={`auth-input ${
-              touched.password && errors.password ? "auth-input-error" : ""
-            }`}
-            required
-          />
-          {touched.password && errors.password && (
-            <div className="auth-error">{errors.password}</div>
-          )}
-        </div>
-
-        {errors.submit && (
-          <div className="auth-error auth-error-submit">{errors.submit}</div>
-        )}
-
-        <button className="auth-btn" onClick={handleLogin}>
-          Login
+        <button className="oauth-button" onClick={handleGoogleLogin}>
+          <svg width="18" height="18" viewBox="0 0 18 18">
+            <path
+              fill="#4285F4"
+              d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"
+            />
+            <path
+              fill="#34A853"
+              d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707s.102-1.167.282-1.707V4.961H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.039l3.007-2.332z"
+            />
+            <path
+              fill="#EA4335"
+              d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z"
+            />
+          </svg>
+          Continue with Google
         </button>
+
+        <div className="divider">
+          <span>or</span>
+        </div>
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">

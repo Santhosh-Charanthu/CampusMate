@@ -85,16 +85,11 @@ const UserSchema = new mongoose.Schema(
       bio: { type: String },
       interests: [{ type: String }],
       skills: [{ type: String }],
-<<<<<<< HEAD
-      avatarUrl: { type: String },
-      coverPhotoUrl: { type: String },
-=======
       avatarUrl: {
         type: String,
         default: "",
       },
       // coverPhotoUrl: { type: String },
->>>>>>> origin/nagasai
     },
 
     // ----------------------------------

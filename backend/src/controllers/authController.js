@@ -18,10 +18,7 @@ function createToken(user) {
   );
 }
 
-/**
- * POST /api/auth/register
- * Body: { name, email, password, college? }
- */ exports.register = async (req, res, next) => {
+exports.register = async (req, res, next) => {
   try {
     const {
       name,
@@ -69,7 +66,8 @@ function createToken(user) {
     const skillsArr = skills ? (Array.isArray(skills) ? skills : [skills]) : [];
 
     /* ---------------- AVATAR UPLOAD (CLOUDINARY) ---------------- */
-    let avatarUrl = "";
+    // 🔴 CHANGED: store both url + publicId
+    let avatar = { url: "", publicId: "" };
 
     if (req.files?.avatar?.[0]) {
       const uploadFromBuffer = () =>
@@ -89,7 +87,8 @@ function createToken(user) {
         });
 
       const result = await uploadFromBuffer();
-      avatarUrl = result.secure_url;
+      avatar.url = result.secure_url;
+      avatar.publicId = result.public_id;
     }
 
     /* ---------------- CREATE USER ---------------- */
@@ -105,12 +104,15 @@ function createToken(user) {
       },
 
       profile: {
-        year: parseInt(year) || undefined,
+        // 🔴 CHANGED: store year as STRING
+        year: year || "",
         department: department || "",
         bio: bio || "",
         interests: interestsArr,
         skills: skillsArr,
-        avatarUrl, // ✅ Cloudinary URL
+
+        // 🔴 CHANGED: avatar object
+        avatar,
       },
 
       role: "student",
