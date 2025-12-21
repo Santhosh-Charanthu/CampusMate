@@ -1,0 +1,73 @@
+.shareBox {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  padding: 12px;
+  max-width: 500px;
+  margin: 0 auto 16px auto;
+}
+
+.textarea {
+  width: 100%;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.leftTools {
+  display: flex;
+  gap: 8px;
+}
+
+.tool {
+  background: none;
+  border: none;
+  color: #555;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.postBtn {
+  background: #0a66c2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.postBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* New layout to match LinkedIn-like composer */
+.composerTop { display:flex; gap:12px; align-items:center; padding:6px 6px 10px 6px }
+.createLabel { flex:1; text-align:left; padding:12px 16px; border-radius:8px; border:1px solid #eee; background:#fafafa; color:#686868; font-weight:600 }
+
+.toolbarRow { display:flex; justify-content:space-between; align-items:center; margin-top:10px; border-top:1px solid #efefef; padding-top:10px }
+.toolbarLeft { display:flex; gap:12px }
+.iconBtn { display:flex; gap:8px; align-items:center; background:none; border:none; padding:6px 10px; border-radius:8px; cursor:pointer; color:#555 }
+.iconBtn:hover { background:#f4f6f8 }
+.iconBox { display:inline-flex; width:28px; height:20px; align-items:center; justify-content:center; background:#eef6ff; color:#0a66c2; border-radius:4px }
+.toolbarRight { display:flex; align-items:center }
+
+.mediaPreview { margin-top:8px }
+.previewImage { width:100%; max-height:420px; object-fit:cover; border-radius:8px }
+
+.cancelBtn { background: #fff; border: 1px solid #d0d7de; padding: 8px 12px; border-radius: 20px; cursor:pointer }
+
+.articleMeta { margin-top: 10px; display:flex; flex-direction:column; gap:8px }
+.articleTitle { padding:8px 10px; border-radius:8px; border:1px solid #e8e8e8 }
+.articleHint { font-size:12px; color:#777 }

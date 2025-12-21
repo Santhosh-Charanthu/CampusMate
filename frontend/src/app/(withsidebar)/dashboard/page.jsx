@@ -12,14 +12,10 @@ export default function DashboardPage() {
     <div>
       <Header />
 
-      <button
-        style={{ margin: "16px" }}
-        onClick={() => router.push("/leaderboard")}
-      >
-        Go to Leaderboard
-      </button>
-
-      <PostFeed posts={samplePosts} />
+      {/* spacer to account for fixed header height */}
+      <main style={{ paddingTop: 72 }}>
+        <PostFeed posts={samplePosts} />
+      </main>
     </div>
   );
 }
