@@ -6,7 +6,11 @@ export default function DashboardPage() {
   return (
     <div>
       <Header />
-      <PostFeed posts={samplePosts} />
+
+      {/* spacer to account for fixed header height */}
+      <main style={{ paddingTop: 72 }}>
+        <PostFeed posts={samplePosts} />
+      </main>
     </div>
   );
 }

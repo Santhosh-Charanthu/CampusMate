@@ -1,0 +1,76 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 320px 1fr 320px;
+  gap: 16px;
+}
+
+.leftPanel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  display:flex;
+  flex-direction:column;
+}
+.leftHeader {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+.newMsgBtn {
+  border: none;
+  background: #eef6ff;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.searchWrap { margin-top:8px }
+.searchInput {
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #eef1f4;
+  outline:none;
+}
+.tabs { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap }
+.tabBtn { padding:6px 10px; border-radius:999px; border:1px solid #eee; background:transparent; cursor:pointer }
+.tabActive { border-color:#0a66c2; background:#eaf3ff }
+
+.conversationList { margin-top:12px; display:flex; flex-direction:column; gap:6px; max-height:64vh; overflow:auto }
+.conversationItem { display:flex; gap:12px; align-items:center; padding:8px; border-radius:8px; cursor:pointer; transition:background .12s }
+.conversationItem:hover { background:#fbfbfd }
+.active { background:#f3f6fb }
+.avatar { width:48px; height:48px; border-radius:8px; object-fit:cover }
+.conversationMeta { flex:1 }
+.timestamp { font-size:12px; color:#888 }
+.lastMsg { font-size:13px; color:#666; margin-top:6px }
+.unreadBadge { background:#0a66c2; color:#fff; padding:4px 8px; border-radius:99px; font-size:12px; font-weight:700; margin-left:8px }
+
+.middlePanel { background:#fff; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.06); display:flex; flex-direction:column; min-height:70vh; overflow:hidden }
+.middleHeader { padding:16px; border-bottom:1px solid #f1f1f1; display:flex; justify-content:space-between; align-items:center }
+.headerAvatar { width:44px; height:44px; border-radius:8px; object-fit:cover }
+
+.messageList { padding:16px; flex:1; overflow:auto; display:flex; flex-direction:column; gap:12px }
+.messageRow { display:flex; gap:12px; align-items:flex-start }
+.incoming { flex-direction: row }
+.outgoing { flex-direction: row-reverse }
+.msgAvatar { width:40px; height:40px; border-radius:20px; object-fit:cover }
+.msgBubble { max-width:70%; padding:12px; border-radius:12px; background:#f6f7f9 }
+.outgoing .msgBubble { background:#eaf3ff }
+
+.promoCard { display:flex; gap:12px; align-items:center; background:linear-gradient(180deg,#fff,#fbfbfd); padding:12px; border-radius:10px }
+.promoImage { width:140px; height:140px; object-fit:cover; border-radius:8px }
+.promoContent { display:flex; flex-direction:column; gap:8px }
+.ctaRow { display:flex; gap:8px }
+.ctaPrimary { background:#0a66c2; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer }
+.ctaSecondary { background:#fff; border:1px solid #ddd; padding:8px 12px; border-radius:8px; cursor:pointer }
+
+.composeRow { padding:12px; border-top:1px solid #f1f1f1; display:flex; gap:8px; align-items:center }
+.composeInput { flex:1; padding:10px; border-radius:10px; border:1px solid #eef1f4 }
+.sendBtn { background:#0a66c2; color:#fff; border:none; padding:10px 14px; border-radius:8px; cursor:pointer }
+
+.rightPanel { background:#fff; border-radius:12px; padding:12px; box-shadow:0 6px 18px rgba(0,0,0,0.06) }
+.rightProfile { display:flex; gap:12px; align-items:center; margin-bottom:12px }
+.rightAvatar { width:64px; height:64px; border-radius:10px; object-fit:cover }
+.rightInfo { font-size:14px }

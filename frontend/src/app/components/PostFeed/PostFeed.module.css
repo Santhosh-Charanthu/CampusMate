@@ -5,6 +5,28 @@
   width: 100%;
 }
 
+.layout {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+  padding: 12px 24px;
+}
+
+.leftColumn {
+  width: 720px; /* wider feed to resemble LinkedIn */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rightColumn {
+  width: 320px; /* sidebar suggestions */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .feed {
   display: flex;
   flex-direction: column;
@@ -12,3 +34,14 @@
   width: 100%;
   gap: 20px;
 }
+
+.feedTop { display:flex; gap:24px; width:100%; justify-content:center; padding:20px 24px }
+.feedTopLeft { width:720px }
+.feedTopRight { width:320px; display:flex; flex-direction:column; gap:12px }
+.sortRow { display:flex; align-items:center; justify-content:flex-end; gap:8px }
+.sortLabel { color:#666; font-size:13px }
+.sortSelect { padding:6px 8px; border-radius:6px; border:1px solid #e8e8e8 }
+
+.feedHeader { display:flex; align-items:center; gap:8px; justify-content:flex-end; width:100%; margin-bottom:6px }
+.sortLabel { color:#666; font-size:13px }
+.sortSelect { padding:6px 8px; border-radius:6px; border:1px solid #e8e8e8 }

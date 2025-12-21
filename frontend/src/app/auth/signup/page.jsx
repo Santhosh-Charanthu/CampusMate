@@ -79,6 +79,9 @@ export default function SignupPage() {
     });
 
     const data = await res.json();
+    if (data?.token) {
+      try { localStorage.setItem('token', data.token); localStorage.setItem('currentUser', JSON.stringify(data.user || {})); } catch(e){}
+    }
     alert(data.success ? "Signup Successful!" : data.error);
   };
 

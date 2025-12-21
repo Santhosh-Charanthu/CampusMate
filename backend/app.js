@@ -17,6 +17,9 @@ const { connectDB, closeDB } = require("./src/config/db");
 // ROUTES
 const authRoutes = require("./src/routes/authRoutes");
 const adminSetupRoute = require("./src/routes/adminSetup");
+const usersRoute = require("./src/routes/users");
+const postsRoute = require("./src/routes/posts");
+const chatRoute = require("./src/routes/chat");
 
 // YOUR ROUTES
 const postRoutes = require("./src/routes/postRoutes");
@@ -110,9 +113,16 @@ app.use("/api/auth", authRoutes);
 // Admin setup
 app.use("/api/setup/admin", adminSetupRoute);
 
-// Your Feature Routes
-app.use("/api/posts", postRoutes);
-app.use("/api/users", userRoutes);
+// Feature routes (namespaced to avoid duplicate handlers)
+app.use("/api/posts/features", postRoutes);
+app.use("/api/users/features", userRoutes);
+
+// Main routes
+app.use("/api/users", usersRoute);
+app.use("/api/posts", postsRoute);
+
+// Chat (rooms & messages)
+app.use("/api/chat", chatRoute);
 
 // Health route
 app.get("/health", (req, res) => res.json({ ok: true }));
