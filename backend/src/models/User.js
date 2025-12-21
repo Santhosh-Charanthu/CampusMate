@@ -88,6 +88,8 @@ const UserSchema = new mongoose.Schema(
       enum: ["student", "admin"],
       default: "student",
     },
+    isOnline: { type: Boolean, default: false },
+    lastSeen: { type: Date, default: Date.now },
   },
   {
     timestamps: true, // adds createdAt & updatedAt
