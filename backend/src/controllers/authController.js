@@ -2,6 +2,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const cloudinary = require("../config/cloudinary");
+const streamifier = require("streamifier");
 
 // Read JWT secret and expiry from env
 const JWT_SECRET = process.env.JWT_SECRET || "change_this_in_prod";
@@ -19,8 +21,7 @@ function createToken(user) {
 /**
  * POST /api/auth/register
  * Body: { name, email, password, college? }
- */
-exports.register = async (req, res, next) => {
+ */ exports.register = async (req, res, next) => {
   try {
     const {
       name,
@@ -35,7 +36,7 @@ exports.register = async (req, res, next) => {
       skills,
     } = req.body || {};
 
-    // Basic validations (Mongoose enforces the rest)
+    /* ---------------- BASIC VALIDATIONS ---------------- */
     if (!name || !email || !password) {
       return res
         .status(400)
@@ -48,17 +49,17 @@ exports.register = async (req, res, next) => {
         .json({ message: "password must be at least 6 characters" });
     }
 
-    // Check existing user
+    /* ---------------- CHECK EXISTING USER ---------------- */
     const existing = await User.findOne({ email });
     if (existing) {
       return res.status(409).json({ message: "Email already registered" });
     }
 
-    // Hash password
+    /* ---------------- HASH PASSWORD ---------------- */
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
 
-    // Convert interests & skills to arrays if single entry
+    /* ---------------- INTERESTS & SKILLS ---------------- */
     const interestsArr = interests
       ? Array.isArray(interests)
         ? interests
@@ -67,11 +68,31 @@ exports.register = async (req, res, next) => {
 
     const skillsArr = skills ? (Array.isArray(skills) ? skills : [skills]) : [];
 
-    // Avatar and Cover Photo URLs from Multer
-    const avatarUrl = req.files?.avatar?.[0]?.path || "";
-    // const coverPhotoUrl = req.files?.coverPhoto?.[0]?.path || "";
+    /* ---------------- AVATAR UPLOAD (CLOUDINARY) ---------------- */
+    let avatarUrl = "";
 
-    // Build final user object
+    if (req.files?.avatar?.[0]) {
+      const uploadFromBuffer = () =>
+        new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream(
+            {
+              folder: "campusconnect/avatars",
+              resource_type: "image",
+            },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          );
+
+          streamifier.createReadStream(req.files.avatar[0].buffer).pipe(stream);
+        });
+
+      const result = await uploadFromBuffer();
+      avatarUrl = result.secure_url;
+    }
+
+    /* ---------------- CREATE USER ---------------- */
     const user = new User({
       name: name.trim(),
       email: email.toLowerCase().trim(),
@@ -89,14 +110,14 @@ exports.register = async (req, res, next) => {
         bio: bio || "",
         interests: interestsArr,
         skills: skillsArr,
-        avatarUrl,
-        // coverPhotoUrl,
+        avatarUrl, // ✅ Cloudinary URL
       },
 
       role: "student",
     });
 
     await user.save();
+
     const token = createToken(user);
 
     return res.status(201).json({
@@ -113,7 +134,6 @@ exports.register = async (req, res, next) => {
     next(err);
   }
 };
-
 /**
  * POST /api/auth/login
  * Body: { email, password }

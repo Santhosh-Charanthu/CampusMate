@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/upload");
+
 const { requireAuth } = require("../middleware/authMiddleware");
 const postController = require("../controllers/postController");
 const commentController = require("../controllers/commentController");
@@ -7,7 +9,6 @@ const commentController = require("../controllers/commentController");
 // --- TEMPORARY UPLOAD MIDDLEWARE ---
 // (Since you don't have the real upload middleware yet, this prevents the app from crashing)
 // (Your teammate will replace this with the real Multer middleware later)
-const upload = { array: (fieldName) => (req, res, next) => next() }; 
 
 // ==========================
 // YOUR ASSIGNED FEATURES
@@ -28,9 +29,32 @@ router.get("/:postId/comments", requireAuth, commentController.getComments);
 // Create Post (Uses dummy upload for now)
 // router.post("/", requireAuth, upload.array("media"), postController.createPost);
 // NEW (Temporary Test)
+<<<<<<< HEAD
 router.post("/", requireAuth, postController.createPost);
+=======
+
+router.post(
+  "/:userId",
+  requireAuth,
+  upload.array("media", 5),
+  postController.createPost
+);
+// GET POST FOR EDIT PAGE
+
+router.put(
+  "/:postId/edit",
+  requireAuth,
+  upload.array("media", 5),
+  postController.editPost
+);
+router.delete("/:postId/delete", requireAuth, postController.deletePost);
+>>>>>>> origin/nagasai
 
 // Get Feed
 router.get("/", requireAuth, postController.getFeed);
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> origin/nagasai

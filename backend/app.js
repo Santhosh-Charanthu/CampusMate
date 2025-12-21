@@ -1,5 +1,11 @@
 require("dotenv").config();
-console.log('DEBUG: ADMIN_SECRET=', process.env.ADMIN_SECRET && process.env.ADMIN_SECRET.length ? '***set***' : '***NOT SET***');
+
+console.log(
+  "DEBUG: ADMIN_SECRET=",
+  process.env.ADMIN_SECRET && process.env.ADMIN_SECRET.length
+    ? "***set***"
+    : "***NOT SET***"
+);
 
 const express = require("express");
 const http = require("http");
@@ -9,14 +15,18 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const { Server } = require("socket.io");
 const mongoose = require("mongoose");
+<<<<<<< HEAD
 
 // const initSocket = require("./src/socket/socket"); // Uncomment when file exists
 
 const { connectDB, closeDB } = require("./src/config/db");
+=======
+>>>>>>> origin/nagasai
 
 // ROUTES
 const authRoutes = require("./src/routes/authRoutes");
 const adminSetupRoute = require("./src/routes/adminSetup");
+<<<<<<< HEAD
 const usersRoute = require("./src/routes/users");
 const postsRoute = require("./src/routes/posts");
 const chatRoute = require("./src/routes/chat");
@@ -25,6 +35,11 @@ const chatRoute = require("./src/routes/chat");
 const postRoutes = require("./src/routes/postRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 
+=======
+const postRoutes = require("./src/routes/postRoutes");
+const userRoutes = require("./src/routes/userRoutes");
+const profileRoutes = require("./src/routes/profileRoutes");
+>>>>>>> origin/nagasai
 // MIDDLEWARE
 const errorHandler = require("./src/middleware/errorHandler");
 
@@ -36,10 +51,18 @@ const app = express();
 
 app.use(helmet());
 
+/* ✅ SINGLE, CORRECT CORS CONFIG */
 app.use(
   cors({
+<<<<<<< HEAD
     origin: process.env.FRONTEND_ORIGIN || true,
     credentials: true,
+=======
+    origin: true, // allow all origins (Postman Web + frontend)
+    credentials: true, // allow cookies / auth headers
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+>>>>>>> origin/nagasai
   })
 );
 
@@ -47,7 +70,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Basic Rate Limiting
+// Rate Limiting
 app.use(
   rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
@@ -104,14 +127,41 @@ const io = new Server(server, {
 // });
 
 /* ----------------------------------------
+   DATABASE
+---------------------------------------- */
+
+const dbUrl = process.env.MONGO_URI;
+
+mongoose
+  .connect(dbUrl)
+  .then(() => console.log("Connected to DB"))
+  .catch((err) => console.log("DB Connection Error:", err));
+
+/* ----------------------------------------
+   SERVER & SOCKET
+---------------------------------------- */
+
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: true,
+    credentials: true,
+  },
+});
+
+// socket code can stay commented if not used
+// initSocket(io);
+
+/* ----------------------------------------
    ROUTES
 ---------------------------------------- */
 
-// Auth routes
 app.use("/api/auth", authRoutes);
-
-// Admin setup
 app.use("/api/setup/admin", adminSetupRoute);
+app.use("/posts", postRoutes);
+app.use("/api/users", userRoutes);
+app.use("/profile", profileRoutes);
 
 // Feature routes (namespaced to avoid duplicate handlers)
 app.use("/api/posts/features", postRoutes);
