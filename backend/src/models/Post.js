@@ -22,20 +22,21 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
 
-  type: {
-    type: String,
-    enum: ["text", "image", "video"],
-    default: "text",
-  },
+    type: {
+      type: String,
+      enum: ["text", "image", "video"],
+      default: "text",
+    },
 
-  caption: String,
-  mediaUrls: [String],
-  thumbnailUrl: String,
+    caption: String,
+    mediaUrls: [String],
+    thumbnailUrl: String,
 
-  visibility: {
-    type: String,
-    enum: ["public", "private", "group", "friends"],
-    default: "public",
+    visibility: {
+      type: String,
+      enum: ["public", "private", "group", "friends"],
+      default: "public",
+    },
   },
 
   {

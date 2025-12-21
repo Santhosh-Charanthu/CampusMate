@@ -29,9 +29,7 @@ router.get("/:postId/comments", requireAuth, commentController.getComments);
 // Create Post (Uses dummy upload for now)
 // router.post("/", requireAuth, upload.array("media"), postController.createPost);
 // NEW (Temporary Test)
-<<<<<<< HEAD
 router.post("/", requireAuth, postController.createPost);
-=======
 
 router.post(
   "/:userId",
@@ -48,13 +46,8 @@ router.put(
   postController.editPost
 );
 router.delete("/:postId/delete", requireAuth, postController.deletePost);
->>>>>>> origin/nagasai
 
 // Get Feed
 router.get("/", requireAuth, postController.getFeed);
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> origin/nagasai

@@ -15,31 +15,22 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const { Server } = require("socket.io");
 const mongoose = require("mongoose");
-<<<<<<< HEAD
 
 // const initSocket = require("./src/socket/socket"); // Uncomment when file exists
 
 const { connectDB, closeDB } = require("./src/config/db");
-=======
->>>>>>> origin/nagasai
 
 // ROUTES
 const authRoutes = require("./src/routes/authRoutes");
 const adminSetupRoute = require("./src/routes/adminSetup");
-<<<<<<< HEAD
-const usersRoute = require("./src/routes/users");
 const postsRoute = require("./src/routes/posts");
 const chatRoute = require("./src/routes/chat");
 
-// YOUR ROUTES
-const postRoutes = require("./src/routes/postRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 
-=======
 const postRoutes = require("./src/routes/postRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const profileRoutes = require("./src/routes/profileRoutes");
->>>>>>> origin/nagasai
 // MIDDLEWARE
 const errorHandler = require("./src/middleware/errorHandler");
 
@@ -54,15 +45,10 @@ app.use(helmet());
 /* ✅ SINGLE, CORRECT CORS CONFIG */
 app.use(
   cors({
-<<<<<<< HEAD
     origin: process.env.FRONTEND_ORIGIN || true,
-    credentials: true,
-=======
-    origin: true, // allow all origins (Postman Web + frontend)
     credentials: true, // allow cookies / auth headers
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
->>>>>>> origin/nagasai
   })
 );
 
@@ -80,8 +66,6 @@ app.use(
   })
 );
 
-const dbUrl = process.env.MONGO_URI;
-
 /* ----------------------------------------
    DATABASE & SERVER SETUP
 ---------------------------------------- */
@@ -92,7 +76,7 @@ mongoose
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log("DB Connection Error:", err));
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
@@ -143,12 +127,12 @@ mongoose
 
 const server = http.createServer(app);
 
-const io = new Server(server, {
-  cors: {
-    origin: true,
-    credentials: true,
-  },
-});
+// const io = new Server(server, {
+//   cors: {
+//     origin: true,
+//     credentials: true,
+//   },
+// });
 
 // socket code can stay commented if not used
 // initSocket(io);
@@ -168,8 +152,8 @@ app.use("/api/posts/features", postRoutes);
 app.use("/api/users/features", userRoutes);
 
 // Main routes
-app.use("/api/users", usersRoute);
-app.use("/api/posts", postsRoute);
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
 // Chat (rooms & messages)
 app.use("/api/chat", chatRoute);
